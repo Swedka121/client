@@ -1,0 +1,135 @@
+"use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useUserStore } from "../../../stores/userStore";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "../ui/sidebar";
+import { useIsAuthenticated } from "../../hooks/useIsAuthenticated";
+import {
+  HomeIcon,
+  LayoutDashboard,
+  MessageCircle,
+  Newspaper,
+  User,
+} from "lucide-react";
+import { ElementType } from "react";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { Card, CardContent } from "../ui/card";
+import { useRouter } from "next/navigation";
+import { useRequester } from "@/hooks/useRequester";
+
+function ProfileSidebar() {
+  const userStore = useUserStore();
+  const isAuthenticated = useIsAuthenticated();
+  const router = useRouter();
+
+  const { getRequester, endRequest } = useRequester();
+
+  const items: { title: string; url: string; icon: ElementType }[] = [
+    { title: "Profile", url: "/profile", icon: HomeIcon },
+    { title: "Comments", url: "/profile/comments", icon: MessageCircle },
+  ];
+  const adminPanel: { title: string; url: string; icon: ElementType }[] = [
+    { title: "Dashboard", url: "/profile/admin", icon: LayoutDashboard },
+    { title: "Users", url: "/profile/admin/users", icon: User },
+    { title: "Blogs", url: "/profile/admin/blogs", icon: Newspaper },
+  ];
+
+  async function onClickLogout() {
+    if (!getRequester().isAuth) return;
+    await getRequester()
+      .instance.get("/auth/logout")
+      .then(() => {
+        userStore.logout();
+      })
+      .then(() => {
+        endRequest();
+      })
+      .then(() => {
+        router.push("/");
+      });
+  }
+  return (
+    <Sidebar>
+      <SidebarHeader className="p-6">
+        <Link className="w-full" href="/">
+          <Button className="w-full">Back</Button>
+        </Link>
+        <Button className="w-full" onClick={onClickLogout}>
+          Logout
+        </Button>
+        {isAuthenticated ? (
+          <Card>
+            <CardContent className="flex flex-row items-center justify-center gap-[20px] size-full">
+              <Avatar>
+                <AvatarImage
+                  src={
+                    userStore.avatar == "default"
+                      ? Math.random() >= 0.5
+                        ? "/assets/avatar1.jpg"
+                        : "/assets/avatar2.jpg"
+                      : (userStore.avatar as string)
+                  }
+                ></AvatarImage>
+                <AvatarFallback>A</AvatarFallback>
+              </Avatar>
+              <p className="text-[0.8rem] font-[Montserrat] text-black font-bold">
+                {userStore.username}
+              </p>
+            </CardContent>
+          </Card>
+        ) : null}
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        {userStore.roles?.includes("admin") ||
+        userStore.roles?.includes("manager") ? (
+          <SidebarGroup>
+            <SidebarGroupLabel>Admin panel</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {adminPanel.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <a href={item.url}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ) : null}
+      </SidebarContent>
+    </Sidebar>
+  );
+}
+
+export default ProfileSidebar;

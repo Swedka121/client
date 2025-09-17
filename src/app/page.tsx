@@ -1,103 +1,190 @@
+import ContactForm from "@/components/ContactForm";
+import NewsConatiner from "@/components/NewsComp/NewsContainer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Container from "@/components/ui/container";
+import {
+  HomeIcon,
+  Mail,
+  Phone,
+  CircleQuestionMark,
+  ImageIcon,
+  Newspaper,
+} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  NavigationMenu,
+  NavigationMenuLink,
+} from "@/components/ui/navigation-menu";
+import LoginButton from "@/components/LoginComp/LoginButton";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Lyzeum №23",
+  description: "Site of Lyzeum №23 of Zhytomyr",
+  keywords: ["Lyzeum", "Blogs", "Zhytomyr"],
+};
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <header className="mt-[50px] fixed w-[100%]">
+        <div className="w-[90%] m-auto">
+          <Card>
+            <CardContent className="flex flex-row itrems-center gap-[50px]">
+              <div className="flex flex-row itrems-center gap-[10px]">
+                <p className="font-[Montserrat] text-lg">Lyzeum 23</p>
+                <Avatar>
+                  <AvatarImage src="/assets/logo.png"></AvatarImage>
+                  <AvatarFallback>L</AvatarFallback>
+                </Avatar>
+              </div>
+              <NavigationMenu className="flex flex-row gap-[10px]">
+                <NavigationMenuLink
+                  className="flex flex-row itrems-center gap-[10px]"
+                  href="/"
+                >
+                  <HomeIcon className="size-[1.3rem]" /> Home
+                </NavigationMenuLink>
+                <NavigationMenuLink
+                  className="flex flex-row itrems-center gap-[10px]"
+                  href="/#about"
+                >
+                  <CircleQuestionMark className="size-[1.3rem]" /> About
+                </NavigationMenuLink>
+                <NavigationMenuLink
+                  className="flex flex-row itrems-center gap-[10px]"
+                  href="/#contacts"
+                >
+                  <Phone className="size-[1.3rem]" /> Contacts
+                </NavigationMenuLink>
+                <NavigationMenuLink
+                  className="flex flex-row itrems-center gap-[10px]"
+                  href="/blog"
+                >
+                  <Newspaper className="size-[1.3rem]" /> Blog
+                </NavigationMenuLink>
+                <NavigationMenuLink
+                  className="flex flex-row itrems-center gap-[10px]"
+                  href="/gallery"
+                >
+                  <ImageIcon className="size-[1.3rem]" /> Gallery
+                </NavigationMenuLink>
+              </NavigationMenu>
+              <LoginButton />
+            </CardContent>
+          </Card>
         </div>
+      </header>
+      <main className="flex flex-col row-start-2 itrems-center sm:itrems-start">
+        <Container>
+          <section className="w-full h-[100vh] flex items-center justify-center flex-row ">
+            <div className="w-1/2 flex justify-center itrems-center">
+              <Card className="w-[15vw] h-auto font-[Montserrat]">
+                <CardContent className="flex flex-col justify-between gap-[30px]">
+                  <h3 className="text-[1.5rem]/[1.5rem] font-bold">
+                    Вітаємо вас на сайті Ліцею №23 м. Житомира
+                  </h3>
+                  <p className="w-full break-keep text-[0.9rem]">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Fusce elit ipsum, lacinia non sollicitudin nec, ornare vel
+                    arcu. Proin quis tellus scelerisque, vulputate ligula a,
+                    ultrices enim. In scelerisque volutpat magna, quis viverra
+                    nibh tincidunt et. Morbi sagittis mollis enim, a congue nunc
+                    blandit eu. Maecenas consectetur massa id nulla pretium
+                    feugiat. Suspendisse at leo facilisis, facilisis nunc
+                    elementum, auctor est.
+                  </p>
+                  <Button>Написати</Button>
+                </CardContent>
+              </Card>
+            </div>
+            <h2 className="w-1/2 text-[19rem]/[18rem] tracking-tight">
+              ЛІЦЕЙ 23 <br /> м. ЖИТОМИРА
+            </h2>
+            {/* <Object1 /> */}
+          </section>
+        </Container>
+        <section className="bg-black w-full h-[100vh] flex flex-row" id="about">
+          <div className="bg-white w-1/2 h-full flex justify-center items-center">
+            <Image
+              src={"/assets/ill-1.jpg"}
+              alt="ill"
+              width={700}
+              height={700}
+              className="w-3/4 h-auto"
+            />
+          </div>
+          <div className="w-1/2 h-full flex flex-col items-center justify-center">
+            <h3 className="text-white font-[Conthic] text-[5rem]/[5rem]">
+              ПРО НАС
+            </h3>
+            <p className="w-1/2 h-auto text-white font-[Montserrat] text-center mt-5">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+              elit ipsum, lacinia non sollicitudin nec, ornare vel arcu. Proin
+              quis tellus scelerisque, vulputate ligula a, ultrices enim. In
+              scelerisque volutpat magna, quis viverra nibh tincidunt et. Morbi
+              sagittis mollis enim, a congue nunc blandit eu. Maecenas
+              consectetur massa id nulla pretium feugiat. Suspendisse at leo
+              facilisis, facilisis nunc elementum, auctor est.
+            </p>
+            <h3 className="text-white font-[Conthic] text-[5rem]/[5rem] mt-15">
+              ДЕ МИ ЗНАХОДИМОСЬ?
+            </h3>
+            <iframe
+              className="mt-5 w-5/6 h-[40vh]"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2550.979945031852!2d28.664012277571775!3d50.25495885141906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472c65910a6bf14f%3A0x8cbd7bb491052f7b!2z0JbQuNGC0L7QvNC40YDRgdGM0LrQsCDQvNGW0YHRjNC60LAg0LPRg9C80LDQvdGW0YLQsNGA0L3QsCDQs9GW0LzQvdCw0LfRltGPIOKEljIzINGW0LwuINCcLiDQntGH0LXRgNC10YLQsA!5e0!3m2!1suk!2sua!4v1757603187494!5m2!1suk!2sua"
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <p className="text-[0.7rem] font-[Montserrat] text-white mt-1">
+              вулиця Бориса Лятошинського, 14, Житомир, Житомирська область,
+              10014
+            </p>
+          </div>
+        </section>
+        <section className="w-full h-[100vh] bg-black">
+          <Container>
+            <h3 className="text-[6rem] font-[Conthic] text-white mt-5">
+              НАШІ НОВИНИ ТА БЛОГИ
+            </h3>
+            <NewsConatiner />
+          </Container>
+        </section>
+        <section className="w-full h-[100vh] flex flex-row " id="contacts">
+          <div className="w-1/2 h-full bg-black p-8 flex flex-col items-center justify-center gap-[50px]">
+            <ContactForm />
+            <h2 className="w-full text-[18rem]/[18rem] text-center text-white">
+              АБО
+            </h2>
+            <Card className="w-1/2">
+              <CardHeader>
+                <CardTitle>Позвони нам або напиши на пошту</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  <span className="flex flex-row items-center gap-[20px]">
+                    - <Phone className="w-[2rem]" /> +380 63 000 0000
+                  </span>
+
+                  <br />
+                  <span className="flex flex-row items-center gap-[20px]">
+                    - <Mail className="w-[2rem]" /> my.mail@gmail.com
+                  </span>
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="w-1/2 h-full flex items-center">
+            <h2 className="w-1/2 text-[20rem]/[18rem]">
+              НАПИШИ <br /> НАМ
+            </h2>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>
+    </>
   );
 }
