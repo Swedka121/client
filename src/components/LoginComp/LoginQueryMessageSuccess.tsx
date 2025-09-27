@@ -1,12 +1,20 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
+import { use, useEffect, useState } from "react";
 
-function LoginQueryMessageSuccess() {
-  const query = useSearchParams();
-  return query?.has("success") ? (
+function LoginQueryMessageSuccess({
+  searchParams,
+}: {
+  searchParams: Promise<{ success?: string; error?: string }>;
+}) {
+  const query = use(searchParams);
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    setShow(typeof query.success !== "undefined");
+  }, [query]);
+  return show ? (
     <div className="w-full h-full flex flex-col items-center algin-center p-6">
       <Image
         src={"/assets/ill-2.jpg"}

@@ -1,15 +1,17 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import { useUserStore } from "../../../stores/userStore";
 
-function StarterComp() {
-  const query = useSearchParams();
+function StarterComp({
+  searchParams,
+}: {
+  searchParams: Promise<{ sucess?: string; error?: string }>;
+}) {
+  const query = use(searchParams);
   const userStore = useUserStore();
 
   useEffect(() => {
-    if (query?.has("success"))
-      userStore.setAccessToken(query.get("success") as string);
+    if (query.sucess) userStore.setAccessToken(query.sucess as string);
   }, []);
 
   return <></>;
