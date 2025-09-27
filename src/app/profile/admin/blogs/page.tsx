@@ -1,3 +1,4 @@
+"use client";
 import BlogsList from "@/components/AdminComp/BlogsList";
 import { Card, CardContent } from "@/components/ui/card";
 

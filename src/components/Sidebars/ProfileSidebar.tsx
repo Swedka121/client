@@ -15,7 +15,7 @@ import {
 import { useIsAuthenticated } from "../../hooks/useIsAuthenticated";
 import {
   HomeIcon,
-  LayoutDashboard,
+  ImageIcon,
   MessageCircle,
   Newspaper,
   User,
@@ -35,13 +35,13 @@ function ProfileSidebar() {
   const { getRequester, endRequest } = useRequester();
 
   const items: { title: string; url: string; icon: ElementType }[] = [
-    { title: "Profile", url: "/profile", icon: HomeIcon },
-    { title: "Comments", url: "/profile/comments", icon: MessageCircle },
+    { title: "Профіль", url: "/profile", icon: HomeIcon },
+    { title: "Мої коменти", url: "/profile/comments", icon: MessageCircle },
   ];
   const adminPanel: { title: string; url: string; icon: ElementType }[] = [
-    { title: "Dashboard", url: "/profile/admin", icon: LayoutDashboard },
-    { title: "Users", url: "/profile/admin/users", icon: User },
-    { title: "Blogs", url: "/profile/admin/blogs", icon: Newspaper },
+    { title: "Користувачі", url: "/profile/admin/users", icon: User },
+    { title: "Блоги", url: "/profile/admin/blogs", icon: Newspaper },
+    { title: "Галерея", url: "/profile/admin/gallery", icon: ImageIcon },
   ];
 
   async function onClickLogout() {
@@ -62,10 +62,10 @@ function ProfileSidebar() {
     <Sidebar>
       <SidebarHeader className="p-6">
         <Link className="w-full" href="/">
-          <Button className="w-full">Back</Button>
+          <Button className="w-full">Назад до головної</Button>
         </Link>
         <Button className="w-full" onClick={onClickLogout}>
-          Logout
+          Вийти
         </Button>
         {isAuthenticated ? (
           <Card>
@@ -91,16 +91,16 @@ function ProfileSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Основне керування</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -110,16 +110,16 @@ function ProfileSidebar() {
         {userStore.roles?.includes("admin") ||
         userStore.roles?.includes("manager") ? (
           <SidebarGroup>
-            <SidebarGroupLabel>Admin panel</SidebarGroupLabel>
+            <SidebarGroupLabel>Адмін панель</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {adminPanel.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <a href={item.url}>
+                      <Link href={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}

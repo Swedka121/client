@@ -1,3 +1,4 @@
+"use client";
 import BlogCreateButton from "@/components/AdminComp/BlogCreateButton";
 import BlogCreateContent from "@/components/AdminComp/BlogCreateContent";
 import BlogCreateForm from "@/components/AdminComp/BlogCreateForm";

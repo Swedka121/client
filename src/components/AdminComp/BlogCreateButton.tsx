@@ -7,8 +7,10 @@ import {
 } from "../../../stores/blogsTableStore";
 import { Button } from "../ui/button";
 import { useRequester } from "@/hooks/useRequester";
+import { useRouter } from "next/navigation";
 
 function BlogCreateButton() {
+  const router = useRouter();
   const requester = useRequester();
   const [isIn, transition] = useTransition();
   const store = useBlogsTable();
@@ -34,6 +36,7 @@ function BlogCreateButton() {
           .then((data: unknown) => {
             store.create(data as blogTableContent);
             console.log("Create!");
+            router.back();
           })
           .catch(() => {})
           .finally(() => {

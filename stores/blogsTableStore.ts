@@ -16,7 +16,7 @@ export type blogTableContent = {
     username: string;
     avatar: string;
   };
-  id: string;
+  _id: string;
 };
 
 export type blogCreateType = {
@@ -136,7 +136,7 @@ export const useBlogsTable = create<blogsTable>((set, get) => ({
   delete(blogId) {
     set((v) => ({
       ...v,
-      tableContent: v.tableContent.filter((a) => a.id != blogId),
+      tableContent: v.tableContent.filter((a) => a._id != blogId),
     }));
   },
   create(content) {
@@ -145,7 +145,7 @@ export const useBlogsTable = create<blogsTable>((set, get) => ({
   update(blogId, content) {
     set((v) => ({
       ...v,
-      tableContent: [...v.tableContent.filter((a) => a.id != blogId), content],
+      tableContent: [...v.tableContent.filter((a) => a._id != blogId), content],
     }));
   },
 }));

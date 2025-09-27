@@ -1,5 +1,5 @@
 "use client";
-import { animate, createTimeline, stagger } from "animejs";
+import { createTimeline } from "animejs";
 import { useEffect, useRef } from "react";
 
 function Object1() {

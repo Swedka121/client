@@ -1,3 +1,4 @@
+"use client";
 import UserList from "@/components/AdminComp/UsersList";
 import { Card, CardContent } from "@/components/ui/card";
 
