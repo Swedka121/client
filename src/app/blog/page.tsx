@@ -5,9 +5,13 @@ import NewsCard3 from "@/components/NewsComp/NewsCard3";
 
 export async function getBlogs() {
   const data = (
-    await axios.get("/blog/", {
-      baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
-    })
+    await axios
+      .get("/blog/", {
+        baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+      })
+      .catch(() => {
+        return { data: [] };
+      })
   ).data as { _doc: blogTableContent }[];
   console.log(data);
   return data.map((el) => ({ ...el._doc }));

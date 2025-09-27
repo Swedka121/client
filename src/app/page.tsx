@@ -31,9 +31,13 @@ export const metadata: Metadata = {
 
 async function getBlogs() {
   const data = (
-    await axios.get("/blog/", {
-      baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
-    })
+    await axios
+      .get("/blog/", {
+        baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+      })
+      .catch(() => {
+        return { data: [] };
+      })
   ).data as { _doc: blogTableContent }[];
   while (data.length <= 8) {
     console.log("Add!");
