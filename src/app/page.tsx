@@ -34,6 +34,9 @@ async function getBlogs() {
     await axios
       .get("/blog/", {
         baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+        headers: {
+          "Cache-Control": "no-cache",
+        },
       })
       .catch(() => {
         return { data: [] };
