@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import ContactForm from "@/components/ContactForm";
 import NewsConatiner from "@/components/NewsComp/NewsContainer";
 import { Button } from "@/components/ui/button";

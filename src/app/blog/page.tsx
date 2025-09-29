@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Container from "@/components/ui/container";
 import axios from "axios";
 import { blogTableContent } from "../../../stores/blogsTableStore";
