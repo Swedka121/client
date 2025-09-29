@@ -1,12 +1,21 @@
 "use client";
 
+import { useIsMobile } from "@/hooks/use-mobile";
 import { blogTableContent } from "../../../stores/blogsTableStore";
 import NewsCard1 from "./NewsCard1";
 import NewsCard2 from "./NewsCard2";
 import NewsCard3 from "./NewsCard3";
+import NewsCardMobile from "./NewsCardMobile";
 
 function NewsConatiner({ blogs }: { blogs: blogTableContent[] }) {
-  return (
+  const mobile = useIsMobile();
+  return mobile ? (
+    <article className="flex flex-col h-[80vh] w-full gap-[20px] mt-10">
+      <NewsCardMobile {...blogs[0]} />
+      <NewsCardMobile {...blogs[1]} />
+      <NewsCardMobile {...blogs[2]} />
+    </article>
+  ) : (
     <article className="flex flex-row flex-wrap h-[80vh]">
       <div className="w-1/2 h-3/4 p-2 flex flex-col gap-4">
         <NewsCard2 {...blogs[0]} />

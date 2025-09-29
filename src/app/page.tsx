@@ -4,29 +4,21 @@ import NewsConatiner from "@/components/NewsComp/NewsContainer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Container from "@/components/ui/container";
-import {
-  HomeIcon,
-  Mail,
-  Phone,
-  CircleQuestionMark,
-  ImageIcon,
-  Newspaper,
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  NavigationMenu,
-  NavigationMenuLink,
-} from "@/components/ui/navigation-menu";
-import LoginButton from "@/components/LoginComp/LoginButton";
+import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import { Metadata } from "next";
 import axios from "axios";
 import { blogTableContent } from "../../stores/blogsTableStore";
+import MainHeader from "@/components/Headers/MainHeader";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Lyzeum №23",
-  description: "Site of Lyzeum №23 of Zhytomyr",
-  keywords: ["Lyzeum", "Blogs", "Zhytomyr"],
+  title: "Lyceum №23",
+  description: "Site of Lyceum №23 of Zhytomyr",
+  keywords: ["Lyzeum", "Blogs", "Zhytomyr", "Gallery", "Swedka121"],
+  openGraph: {
+    images: ["/assets/logo.png"],
+  },
 };
 // import * as uuid from "uuid";
 
@@ -65,64 +57,17 @@ export default async function Home() {
   const blogs = await getBlogs();
   return (
     <>
-      <header className="mt-[50px] fixed w-[100%]">
-        <div className="w-[90%] m-auto">
-          <Card>
-            <CardContent className="flex flex-row itrems-center gap-[50px]">
-              <div className="flex flex-row itrems-center gap-[10px]">
-                <p className="font-[Montserrat] text-lg">Lyzeum 23</p>
-                <Avatar>
-                  <AvatarImage src="/assets/logo.png"></AvatarImage>
-                  <AvatarFallback>L</AvatarFallback>
-                </Avatar>
-              </div>
-              <NavigationMenu className="flex flex-row gap-[10px]">
-                <NavigationMenuLink
-                  className="flex flex-row itrems-center gap-[10px]"
-                  href="/"
-                >
-                  <HomeIcon className="size-[1.3rem]" /> Home
-                </NavigationMenuLink>
-                <NavigationMenuLink
-                  className="flex flex-row itrems-center gap-[10px]"
-                  href="/#about"
-                >
-                  <CircleQuestionMark className="size-[1.3rem]" /> About
-                </NavigationMenuLink>
-                <NavigationMenuLink
-                  className="flex flex-row itrems-center gap-[10px]"
-                  href="/#contacts"
-                >
-                  <Phone className="size-[1.3rem]" /> Contacts
-                </NavigationMenuLink>
-                <NavigationMenuLink
-                  className="flex flex-row itrems-center gap-[10px]"
-                  href="/blog"
-                >
-                  <Newspaper className="size-[1.3rem]" /> Blog
-                </NavigationMenuLink>
-                <NavigationMenuLink
-                  className="flex flex-row itrems-center gap-[10px]"
-                  href="/gallery"
-                >
-                  <ImageIcon className="size-[1.3rem]" /> Gallery
-                </NavigationMenuLink>
-              </NavigationMenu>
-              <LoginButton />
-            </CardContent>
-          </Card>
-        </div>
-      </header>
+      <MainHeader />
       <main className="flex flex-col row-start-2 itrems-center sm:itrems-start">
         <Container>
-          <section className="w-full h-[100vh] flex items-center justify-center flex-row ">
-            <div className="w-1/2 flex justify-center itrems-center">
-              <Card className="w-[15vw] h-auto font-[Montserrat]">
+          <section className="w-full h-[100vh] flex items-center justify-center flex-row max-md:flex-col-reverse max-md:items-start max-md:justify-end">
+            <div className="w-1/2 flex justify-center items-center max-md:w-full max-md:h-auto max-md:pt-50 max-md:pb-50">
+              <Card className="w-[15vw] h-auto font-[Montserrat] max-md:w-[300px] max-md:h-max">
                 <CardContent className="flex flex-col justify-between gap-[30px]">
-                  <h3 className="text-[1.5rem]/[1.5rem] font-bold">
+                  <h3 className="text-[1.5rem]/[1.5rem] font-bold max-md:text-[2rem]/[2rem]">
                     Вітаємо вас на сайті Ліцею №23 м. Житомира
                   </h3>
-                  <p className="w-full break-keep text-[0.8rem]">
+                  <p className="w-full break-keep text-[0.8rem] max-md:text-[1.1rem]">
                     Ми раді бачити вас на офіційному сайті нашого ліцею! Тут ви
                     знайдете свіжі новини, корисні матеріали та інформацію про
                     життя нашої шкільної родини.
@@ -143,20 +88,24 @@ export default async function Home() {
                     Разом ми створюємо простір для навчання, розвитку та
                     натхнення!
                   </p>
-                  <Button>Написати</Button>
+                  <Link href="#contacts" className="max-md:h-15 ">
+                    <Button className="w-full h-full max-md:text-[1.2rem] max-md:font-bold">
+                      Написати
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </div>
-            <div className="w-1/2 h-full flex items-center justify-center border-l-[20] border-(--foreground)">
+            <div className="max-md:w-full max-md:h-180 w-1/2 h-full flex items-center justify-center border-l-[20] border-(--foreground) max-md:border-l-[0]">
               <Image
-                className="w-1/2 h-full absolute z-[-10] right-[-20] brightness-60 rounded-l-[50]"
+                className="w-1/2 h-full absolute z-[-10] right-[-20] brightness-60 rounded-l-[50] max-md:w-full max-md:h-150 max-md:right-[0] max-md:rounded-b-[50] max-md:rounded-t-[0] max-md:top-[10]"
                 src={"/assets/main.jpg"}
                 width={500}
                 height={600}
                 alt="main"
               ></Image>
-              <div className="w-1/2 h-full absolute right-0 z-[-11] bg-(--foreground)"></div>
-              <h2 className="w-full text-[19rem]/[18rem] tracking-tight pl-10 text-white">
+              <div className="w-1/2 h-full absolute right-0 z-[-11] bg-(--foreground) max-md:hidden"></div>
+              <h2 className="w-full text-[19rem]/[18rem] tracking-tight pl-10 text-white max-md:text-[9rem]/[8rem] max-md:pl-0 max-sm:text-[7rem]/[6rem] max-md:pt-30 max-md:pb-30 max-md:text-justify">
                 ЛІЦЕЙ 23 <br /> м. ЖИТОМИРА
               </h2>
             </div>
@@ -168,7 +117,7 @@ export default async function Home() {
           className="bg-(--foreground) w-full h-[100vh] flex flex-row"
           id="about"
         >
-          <div className="bg-white w-1/2 h-full flex justify-center items-center">
+          <div className="bg-white w-1/2 h-full flex justify-center items-center max-md:hidden">
             <Image
               src={"/assets/ill-1.jpg"}
               alt="ill"
@@ -177,11 +126,11 @@ export default async function Home() {
               className="w-3/4 h-auto"
             />
           </div>
-          <div className="w-1/2 h-full flex flex-col items-center justify-center">
-            <h3 className="text-white font-[Conthic] text-[5rem]/[5rem]">
+          <div className="w-1/2 h-full flex flex-col items-center justify-center max-md:w-full max-md:justify-start max-md:pt-30">
+            <h3 className="text-white font-[Conthic] text-[5rem]/[5rem] max-md:text-[8rem]/[8rem]">
               ПРО НАС
             </h3>
-            <p className="w-1/2 h-auto text-white font-[Montserrat] text-center mt-5">
+            <p className="w-1/2 h-auto text-white font-[Montserrat] text-center mt-5 max-md:w-3/4 max-md:text-[1.5rem] max-md:pt-10">
               Ліцей №23 м. Житомира — це сучасний навчальний заклад, де
               поєднуються традиції та інновації. Ми створюємо умови для
               всебічного розвитку учнів, їхніх талантів та здібностей.
@@ -199,11 +148,11 @@ export default async function Home() {
               <br />
               <br />
             </p>
-            <h3 className="text-white font-[Conthic] text-[5rem]/[5rem] mt-15">
+            <h3 className="text-white font-[Conthic] text-[5rem]/[5rem] mt-15 max-md:text-[4rem]">
               ДЕ МИ ЗНАХОДИМОСЬ?
             </h3>
             <iframe
-              className="mt-5 w-5/6 h-[40vh]"
+              className="mt-5 w-5/6 h-[40vh] max-md:h-[30vh]"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2550.979945031852!2d28.664012277571775!3d50.25495885141906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472c65910a6bf14f%3A0x8cbd7bb491052f7b!2z0JbQuNGC0L7QvNC40YDRgdGM0LrQsCDQvNGW0YHRjNC60LAg0LPRg9C80LDQvdGW0YLQsNGA0L3QsCDQs9GW0LzQvdCw0LfRltGPIOKEljIzINGW0LwuINCcLiDQntGH0LXRgNC10YLQsA!5e0!3m2!1suk!2sua!4v1757603187494!5m2!1suk!2sua"
               allowFullScreen={false}
               loading="lazy"
@@ -215,21 +164,27 @@ export default async function Home() {
             </p>
           </div>
         </section>
-        <section className="w-full h-[100vh] bg-(--foreground)">
+        <section className="w-full h-[100vh] bg-(--foreground) max-md:h-400 max-md:pt-20">
           <Container>
-            <h3 className="text-[6rem] font-[Conthic] text-white mt-5">
+            <h3 className="text-[6rem] font-[Conthic] text-white max-md:text-[4rem]/[4rem]">
               НАШІ НОВИНИ ТА БЛОГИ
             </h3>
             <NewsConatiner blogs={blogs} />
           </Container>
         </section>
-        <section className="w-full h-[100vh] flex flex-row " id="contacts">
-          <div className="w-1/2 h-full bg-(--foreground) p-8 flex flex-col items-center justify-center gap-[50px]">
+        <section
+          className="w-full h-[100vh] flex flex-row max-md:h-max max-md:bg-(--foreground)"
+          id="contacts"
+        >
+          <div className="w-1/2 h-full bg-(--foreground) p-8 flex flex-col items-center justify-center gap-[50px] max-md:w-full">
+            <h3 className="text-white font-[Conthic] text-[5rem]/[5rem] text-center max-md:text-[8rem]/[8rem] md:hidden">
+              НАПИШИ НАМ
+            </h3>
             <ContactForm />
-            <h2 className="w-full text-[18rem]/[18rem] text-center text-white">
+            <h2 className="w-full text-[18rem]/[18rem] text-white text-center max-md:hidden">
               АБО
             </h2>
-            <Card className="w-1/2">
+            <Card className="w-1/2 max-md:w-3/4">
               <CardHeader>
                 <CardTitle>Позвони нам або напиши на пошту</CardTitle>
               </CardHeader>
@@ -247,7 +202,7 @@ export default async function Home() {
               </CardContent>
             </Card>
           </div>
-          <div className="w-1/2 h-full flex items-center">
+          <div className="w-1/2 h-full flex items-center max-md:hidden">
             <h2 className="w-1/2 text-[20rem]/[18rem]">
               НАПИШИ <br /> НАМ
             </h2>

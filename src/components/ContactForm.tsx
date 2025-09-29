@@ -17,7 +17,7 @@ import { Button } from "./ui/button";
 function ContactForm() {
   const form = useForm();
   return (
-    <Card className="w-1/2 h-auto">
+    <Card className="w-1/2 h-auto max-md:w-3/4">
       <CardHeader>
         <CardTitle>Контактна форма</CardTitle>
       </CardHeader>

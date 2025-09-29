@@ -1,4 +1,6 @@
+import SidebarMount from "@/components/Sidebars/SidebarMount";
 import "./globals.css";
+import MenuSidebar from "@/components/Sidebars/MenuSidebar";
 
 export default function RootLayout({
   children,
@@ -7,7 +9,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="p-0 m-0">{children}</body>
+      <body className="p-0 m-0">
+        <SidebarMount>
+          <main className="w-screen h-screen overflow-x-hidden absolute top-0 left-0">
+            {children}
+          </main>
+
+          <MenuSidebar />
+        </SidebarMount>
+      </body>
     </html>
   );
 }

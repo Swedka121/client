@@ -46,7 +46,7 @@ export async function generateMetadata({
     keywords: ["school_blogs", "Шкільні блоги"],
     openGraph: {
       type: "article",
-      title: blog.data.title,
+      title: "Lyceum 23 | " + blog.data.title,
       description: blog.data.description,
       images: [{ url: blog.data.avatar }],
       siteName: "Lyceum 23",
