@@ -3,6 +3,9 @@ import Container from "@/components/ui/container";
 import axios from "axios";
 import { blogTableContent } from "../../../stores/blogsTableStore";
 import NewsCard3 from "@/components/NewsComp/NewsCard3";
+import { userAgent } from "next/server";
+import { headers } from "next/headers";
+import NewsCardMobile from "@/components/NewsComp/NewsCardMobile";
 
 export async function getBlogs() {
   const data = (
@@ -21,12 +24,18 @@ export async function getBlogs() {
 
 async function Page() {
   const blogs = await getBlogs();
+  const mobile =
+    userAgent({ headers: await headers() }).device.type == "mobile";
   return (
     <Container>
       <section className="w-full h-auto flex flex-row flex-wrap gap-[20px] pt-40">
-        {blogs.map((el) => (
-          <NewsCard3 key={el._id} {...el} />
-        ))}
+        {blogs.map((el) =>
+          mobile ? (
+            <NewsCardMobile {...el} key={el._id} />
+          ) : (
+            <NewsCard3 key={el._id} {...el} />
+          )
+        )}
       </section>
     </Container>
   );

@@ -8,6 +8,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BlogContent from "@/components/BlogComp/BlogContent";
 import * as uuid from "uuid";
 import { Metadata } from "next";
+import { userAgent } from "next/server";
+import { headers } from "next/headers";
+import NewsCardMobile from "@/components/NewsComp/NewsCardMobile";
 
 async function getBlog(id: string) {
   const data = await axios
@@ -62,30 +65,36 @@ export async function generateMetadata({
 }
 
 const Page: FC<BlogPageProps> = async ({ params }) => {
+  const mobile =
+    userAgent({ headers: await headers() }).device.type == "mobile";
   const blog = await getBlog(params["blogId"] as string);
 
   return (
     <Container>
       <section className="pt-40 w-full h-auto">
-        <Card>
-          <CardContent className="flex flex-row gap-[20px]">
-            <img
-              src={blog.data.avatar}
-              className="rounded-lg w-1/2 h-full"
-            ></img>
-            <div className="flex flex-col gap-[20px]">
-              <h4 className="text-[2rem] font-bold">{blog.data.title}</h4>
-              <p>{blog.data.description}</p>
-              <div className="flex flex-row items-center gap-[20px]">
-                <Avatar>
-                  <AvatarImage src={blog.data.author.avatar}></AvatarImage>
-                  <AvatarFallback>A</AvatarFallback>
-                </Avatar>
-                <p>{blog.data.author.username}</p>
+        {mobile ? (
+          <NewsCardMobile {...blog.data} />
+        ) : (
+          <Card>
+            <CardContent className="flex flex-row gap-[20px]">
+              <img
+                src={blog.data.avatar}
+                className="rounded-lg w-1/2 h-full"
+              ></img>
+              <div className="flex flex-col gap-[20px]">
+                <h4 className="text-[2rem] font-bold">{blog.data.title}</h4>
+                <p>{blog.data.description}</p>
+                <div className="flex flex-row items-center gap-[20px]">
+                  <Avatar>
+                    <AvatarImage src={blog.data.author.avatar}></AvatarImage>
+                    <AvatarFallback>A</AvatarFallback>
+                  </Avatar>
+                  <p>{blog.data.author.username}</p>
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        )}
       </section>
       <section className="pt-20 pb-20">
         <BlogContent

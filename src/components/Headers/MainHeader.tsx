@@ -18,7 +18,7 @@ async function MainHeader() {
   const mobile =
     userAgent({ headers: await headers() }).device.type == "mobile";
   return mobile ? (
-    <header className="h-25 w-full bg-(--foreground) fixed">
+    <header className="h-25 w-full bg-(--foreground) fixed z-[100]">
       <Container>
         <div className="flex flex-row w-full h-full justify-between items-center">
           <div className="flex flex-row items-center justify-start gap-[10px] h-25 w-content">

@@ -36,7 +36,6 @@ async function getBlogs() {
       })
   ).data as { _doc: blogTableContent }[];
   while (data.length <= 8) {
-    console.log("Add!");
     data.push({
       _doc: {
         _id: "none",
@@ -98,14 +97,14 @@ export default async function Home() {
             </div>
             <div className="max-md:w-full max-md:h-180 w-1/2 h-full flex items-center justify-center border-l-[20] border-(--foreground) max-md:border-l-[0]">
               <Image
-                className="w-1/2 h-full absolute z-[-10] right-[-20] brightness-60 rounded-l-[50] max-md:w-full max-md:h-150 max-md:right-[0] max-md:rounded-b-[50] max-md:rounded-t-[0] max-md:top-[10]"
+                className="w-1/2 h-full absolute z-[-10] right-[-20] brightness-60 rounded-l-[50] max-md:w-full max-md:h-[30vh] max-md:right-[0] max-md:rounded-b-[50] max-md:rounded-t-[0] max-md:top-[10]"
                 src={"/assets/main.jpg"}
                 width={500}
                 height={600}
                 alt="main"
               ></Image>
               <div className="w-1/2 h-full absolute right-0 z-[-11] bg-(--foreground) max-md:hidden"></div>
-              <h2 className="w-full text-[19rem]/[18rem] tracking-tight pl-10 text-white max-md:text-[9rem]/[8rem] max-md:pl-0 max-sm:text-[7rem]/[6rem] max-md:pt-30 max-md:pb-30 max-md:text-justify">
+              <h2 className="w-full text-[19rem]/[18rem] tracking-tight pl-10 text-white max-md:text-[9rem]/[8rem] max-md:pl-0 max-sm:text-[6rem]/[6rem] max-md:pt-30 max-md:pb-30 max-md:text-justify">
                 ЛІЦЕЙ 23 <br /> м. ЖИТОМИРА
               </h2>
             </div>
