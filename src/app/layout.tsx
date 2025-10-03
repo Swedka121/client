@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="p-0 m-0">
-        <SidebarMount>
+        <SidebarMount defaultOpen={false}>
           <main className="w-screen h-screen overflow-x-hidden absolute top-0 left-0">
             {children}
           </main>
