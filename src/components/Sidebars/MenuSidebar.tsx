@@ -2,7 +2,6 @@
 import {
   CircleQuestionMarkIcon,
   HomeIcon,
-  Image,
   Newspaper,
   Phone,
 } from "lucide-react";
@@ -22,18 +21,19 @@ import {
 import Link from "next/link";
 import ToggleMenuSidebar from "./ToggleMenuSidebar";
 import { ElementType } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const items: { title: string; url: string; icon: ElementType }[] = [
   { title: "Дім", url: "/", icon: HomeIcon },
   { title: "Про нас", url: "/#about", icon: CircleQuestionMarkIcon },
   { title: "Контакти", url: "/#contacts", icon: Phone },
   { title: "Блог", url: "/blog", icon: Newspaper },
-  { title: "Галерея", url: "/gallery", icon: Image },
 ];
 
 function MenuSidebar() {
   const sidebar = useSidebar();
-  return (
+  const mobile = useIsMobile();
+  return mobile ? (
     <Sidebar side="right">
       <SidebarHeader>
         <ToggleMenuSidebar variant="default" />
@@ -53,8 +53,8 @@ function MenuSidebar() {
                           sidebar.toggleSidebar();
                         }}
                       >
-                        <item.icon />
-                        <span className="text-[1.2rem]">{item.title}</span>
+                        <item.icon className="w-20 h-20" />
+                        <span className="text-[1.5rem]">{item.title}</span>
                       </Button>
                     </Link>
                   </SidebarMenuButton>
@@ -65,7 +65,7 @@ function MenuSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  );
+  ) : null;
 }
 
 export default MenuSidebar;

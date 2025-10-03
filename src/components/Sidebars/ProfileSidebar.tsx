@@ -11,6 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "../ui/sidebar";
 import { useIsAuthenticated } from "../../hooks/useIsAuthenticated";
 import {
@@ -20,7 +21,7 @@ import {
   Newspaper,
   User,
 } from "lucide-react";
-import { ElementType } from "react";
+import { ElementType, useEffect } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Card, CardContent } from "../ui/card";
@@ -31,6 +32,11 @@ function ProfileSidebar() {
   const userStore = useUserStore();
   const isAuthenticated = useIsAuthenticated();
   const router = useRouter();
+  const sidebar = useSidebar();
+
+  useEffect(() => {
+    sidebar.setOpen(true);
+  });
 
   const { getRequester, endRequest } = useRequester();
 

@@ -27,10 +27,17 @@ function NewsCard3({
 }) {
   return (
     <Link href={`/blog/${_id == "none" ? "" : _id}`} className="w-1/4 h-50">
-      <Card className="w-full h-full hover:scale-98 transition">
+      <Card className="w-full h-50 hover:scale-98 transition">
         <CardContent className="flex flex-row gap-[10px]">
-          <img className="w-1/2 h-40 rounded-lg" src={avatar} alt="image"></img>
-          <div className="flex flex-col w-1/2 h-full gap-[20px]">
+          <div className="w-1/2 h-38 rounded-lg overflow-hidden flex justify-center items-center">
+            {" "}
+            <img
+              className="h-auto w-full min-h-full relative object-cover"
+              src={avatar}
+              alt="image"
+            ></img>
+          </div>
+          <div className="flex flex-col w-1/2 h-full gap-[20px] truncate">
             <h4 className="text-[0.9rem] font-bold w-full h-5 text-start text-wrap truncate">
               {title}
             </h4>

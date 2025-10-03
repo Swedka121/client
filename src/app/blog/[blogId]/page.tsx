@@ -10,7 +10,7 @@ import * as uuid from "uuid";
 import { Metadata } from "next";
 import { userAgent } from "next/server";
 import { headers } from "next/headers";
-import NewsCardMobile from "@/components/NewsComp/NewsCardMobile";
+import NewsCardMobileBlogPage from "@/components/NewsComp/NewsCardMobile";
 
 async function getBlog(id: string) {
   const data = await axios
@@ -73,7 +73,7 @@ const Page: FC<BlogPageProps> = async ({ params }) => {
     <Container>
       <section className="pt-40 w-full h-auto">
         {mobile ? (
-          <NewsCardMobile {...blog.data} />
+          <NewsCardMobileBlogPage {...blog.data} />
         ) : (
           <Card>
             <CardContent className="flex flex-row gap-[20px]">

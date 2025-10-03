@@ -28,7 +28,7 @@ function Layout({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   return (
-    <SidebarMount>
+    <SidebarMount defaultOpen={true}>
       <aside>
         <ProfileSidebar />
       </aside>

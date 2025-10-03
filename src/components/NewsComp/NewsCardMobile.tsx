@@ -26,15 +26,21 @@ function NewsCardMobile({
   _id: string;
 }) {
   return (
-    <Link href={`/blog/${_id == "none" ? "" : _id}`} className="w-full h-2/3">
-      <Card className="w-full h-100">
-        <CardContent className="flex flex-row gap-[20px]">
-          <img className="w-1/2 h-85 rounded-lg" src={avatar} alt="image"></img>
-          <div className="flex flex-col w-1/2 h-full gap-[20px]">
-            <h4 className="text-[1.2rem] font-bold w-full h-10 text-start">
+    <Link href={`/blog/${_id}`} className="w-full h-max">
+      <Card className="w-full h-max">
+        <CardContent className="flex flex-col gap-[20px] h-max">
+          <div className="w-full h-85 rounded-lg overflow-hidden flex justify-center items-center">
+            <img
+              className="h-auto w-full min-h-full relative object-cover"
+              src={avatar}
+              alt="image"
+            ></img>
+          </div>
+          <div className="flex flex-col w-full h-max gap-[20px]">
+            <h4 className="text-[1.2rem] font-bold w-full h-auto text-start">
               {title}
             </h4>
-            <p className="text-[1.0rem] w-full h-60 h-auto text-start text-wrap truncate">
+            <p className="text-[1.0rem] w-full h-auto text-start text-wrap truncate">
               {description}
             </p>
             <div className="flex flex-row items-center gap-[20px]">

@@ -129,7 +129,7 @@ export default async function Home() {
             <h3 className="text-white font-[Conthic] text-[5rem]/[5rem] max-md:text-[8rem]/[8rem]">
               ПРО НАС
             </h3>
-            <p className="w-1/2 h-auto text-white font-[Montserrat] text-center mt-5 max-md:w-3/4 max-md:text-[1.5rem] max-md:pt-10">
+            <p className="w-3/4 h-auto text-white font-[Montserrat] text-center text-[1.4rem] font-medium mt-5 max-md:w-3/4 max-md:text-[1.5rem] max-md:pt-10">
               Ліцей №23 м. Житомира — це сучасний навчальний заклад, де
               поєднуються традиції та інновації. Ми створюємо умови для
               всебічного розвитку учнів, їхніх талантів та здібностей.
@@ -163,7 +163,7 @@ export default async function Home() {
             </p>
           </div>
         </section>
-        <section className="w-full h-[100vh] bg-(--foreground) max-md:h-400 max-md:pt-20">
+        <section className="w-full h-max pb-20 pt-20 bg-(--foreground) max-md:pt-20">
           <Container>
             <h3 className="text-[6rem] font-[Conthic] text-white max-md:text-[4rem]/[4rem]">
               НАШІ НОВИНИ ТА БЛОГИ
@@ -172,11 +172,11 @@ export default async function Home() {
           </Container>
         </section>
         <section
-          className="w-full h-[100vh] flex flex-row max-md:h-max max-md:bg-(--foreground)"
+          className="w-full h-max flex flex-row max-md:bg-(--foreground)"
           id="contacts"
         >
-          <div className="w-1/2 h-full bg-(--foreground) p-8 flex flex-col items-center justify-center gap-[50px] max-md:w-full">
-            <h3 className="text-white font-[Conthic] text-[5rem]/[5rem] text-center max-md:text-[8rem]/[8rem] md:hidden">
+          <div className="w-1/2 h-full bg-(--foreground) p-8 flex flex-col items-center justify-center gap-[50px] max-md:w-full pt-30 pb-30">
+            <h3 className="h-full text-white font-[Conthic] text-[5rem]/[5rem] text-center max-md:text-[8rem]/[8rem] md:hidden">
               НАПИШИ НАМ
             </h3>
             <ContactForm />
@@ -201,7 +201,7 @@ export default async function Home() {
               </CardContent>
             </Card>
           </div>
-          <div className="w-1/2 h-full flex items-center max-md:hidden">
+          <div className="w-1/2 h-full flex items-center max-md:hidden pt-30 pb-30">
             <h2 className="w-1/2 text-[20rem]/[18rem]">
               НАПИШИ <br /> НАМ
             </h2>
