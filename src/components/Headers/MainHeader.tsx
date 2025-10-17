@@ -3,13 +3,7 @@ import { userAgent } from "next/server";
 import { Card, CardContent } from "../ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { NavigationMenu, NavigationMenuLink } from "../ui/navigation-menu";
-import {
-  CircleQuestionMark,
-  HomeIcon,
-  ImageIcon,
-  Newspaper,
-  Phone,
-} from "lucide-react";
+import { CircleQuestionMark, HomeIcon, Newspaper, Phone } from "lucide-react";
 import LoginButton from "../LoginComp/LoginButton";
 import Container from "../ui/container";
 import ToggleMenuSidebar from "../Sidebars/ToggleMenuSidebar";
@@ -31,7 +25,7 @@ async function MainHeader() {
               <AvatarFallback>L</AvatarFallback>
             </Avatar>
             <p className="font-[Montserrat] text-[1.7rem] text-white font-bold h-[20px]">
-              Lyzeum 23
+              Ліцей №23
             </p>
           </div>
           <ToggleMenuSidebar variant="secondary" />
@@ -74,12 +68,6 @@ async function MainHeader() {
                 href="/blog"
               >
                 <Newspaper className="size-[1.3rem]" /> Блог
-              </NavigationMenuLink>
-              <NavigationMenuLink
-                className="flex flex-row itrems-center gap-[10px]"
-                href="/gallery"
-              >
-                <ImageIcon className="size-[1.3rem]" /> Галерея
               </NavigationMenuLink>
             </NavigationMenu>
             <LoginButton />

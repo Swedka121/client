@@ -28,7 +28,7 @@ async function Page() {
     userAgent({ headers: await headers() }).device.type == "mobile";
   return (
     <Container>
-      <section className="w-full h-auto flex flex-row flex-wrap gap-[20px] pt-40">
+      <section className="w-full h-auto flex flex-row flex-wrap gap-[20px] pt-50 min-h-[100vh]">
         {blogs.map((el) =>
           mobile ? (
             <NewsCardMobile {...el} key={el._id} />

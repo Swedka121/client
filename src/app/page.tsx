@@ -11,6 +11,7 @@ import axios from "axios";
 import { blogTableContent } from "../../stores/blogsTableStore";
 import MainHeader from "@/components/Headers/MainHeader";
 import Link from "next/link";
+import MainFooter from "@/components/Footers/MainFooter";
 
 export const metadata: Metadata = {
   title: "Lyceum №23",
@@ -59,8 +60,15 @@ export default async function Home() {
       <MainHeader />
       <main className="flex flex-col row-start-2 itrems-center sm:itrems-start">
         <Container>
-          <section className="w-full h-[100vh] flex items-center justify-center flex-row max-md:flex-col-reverse max-md:items-start max-md:justify-end">
-            <div className="w-1/2 flex justify-center items-center max-md:w-full max-md:h-auto max-md:pt-50 max-md:pb-50">
+          <section className="w-full h-[100vh] flex items-center justify-center flex-row max-md:flex-col-reverse max-md:items-start max-md:justify-end max-md:h-[100vh]">
+            <Image
+              className="md:hidden absolute w-full h-[100vh] top-0 left-0 z-[-100]"
+              src={"/assets/main.jpg"}
+              width={500}
+              height={600}
+              alt="main"
+            ></Image>
+            <div className="w-1/2 flex justify-center items-center max-md:w-full max-md:h-max max-md:pt-30 max-md:pb-30">
               <Card className="w-[15vw] h-auto font-[Montserrat] max-md:w-[300px] max-md:h-max">
                 <CardContent className="flex flex-col justify-between gap-[30px]">
                   <h3 className="text-[1.5rem]/[1.5rem] font-bold max-md:text-[2rem]/[2rem]">
@@ -97,14 +105,14 @@ export default async function Home() {
             </div>
             <div className="max-md:w-full max-md:h-180 w-1/2 h-full flex items-center justify-center border-l-[20] border-(--foreground) max-md:border-l-[0]">
               <Image
-                className="w-1/2 h-full absolute z-[-10] right-[-20] brightness-60 rounded-l-[50] max-md:w-full max-md:h-[30vh] max-md:right-[0] max-md:rounded-b-[50] max-md:rounded-t-[0] max-md:top-[10]"
+                className="w-1/2 h-full absolute z-[-10] right-[-20] brightness-60 rounded-l-[50] max-md:hidden"
                 src={"/assets/main.jpg"}
                 width={500}
                 height={600}
                 alt="main"
               ></Image>
               <div className="w-1/2 h-full absolute right-0 z-[-11] bg-(--foreground) max-md:hidden"></div>
-              <h2 className="w-full text-[19rem]/[18rem] tracking-tight pl-10 text-white max-md:text-[9rem]/[8rem] max-md:pl-0 max-sm:text-[6rem]/[6rem] max-md:pt-30 max-md:pb-30 max-md:text-justify">
+              <h2 className="w-full text-[19rem]/[18rem] tracking-tight pl-10 text-white max-md:text-[8rem]/[8rem] max-md:pl-0 max-md:font-bolder max-md:pt-10 max-md:pb-10 max-md:text-center max-md:w-full">
                 ЛІЦЕЙ 23 <br /> м. ЖИТОМИРА
               </h2>
             </div>
@@ -201,14 +209,14 @@ export default async function Home() {
               </CardContent>
             </Card>
           </div>
-          <div className="w-1/2 h-full flex items-center max-md:hidden pt-30 pb-30">
-            <h2 className="w-1/2 text-[20rem]/[18rem]">
+          <div className="w-1/2 h-full flex items-center justify-center max-md:hidden pt-50 pb-50">
+            <h2 className="text-[20rem]/[18rem] text-center leading-none">
               НАПИШИ <br /> НАМ
             </h2>
           </div>
         </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>
+      <MainFooter />
     </>
   );
 }
