@@ -2,6 +2,7 @@
 import {
   CircleQuestionMarkIcon,
   HomeIcon,
+  ImageIcon,
   Newspaper,
   Phone,
 } from "lucide-react";
@@ -11,7 +12,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -28,6 +28,7 @@ const items: { title: string; url: string; icon: ElementType }[] = [
   { title: "Про нас", url: "/#about", icon: CircleQuestionMarkIcon },
   { title: "Контакти", url: "/#contacts", icon: Phone },
   { title: "Блог", url: "/blog", icon: Newspaper },
+  { title: "Блог", url: "/gallery", icon: ImageIcon },
 ];
 
 function MenuSidebar() {
@@ -40,7 +41,6 @@ function MenuSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Меню</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

@@ -1,16 +1,11 @@
 import Container from "@/components/ui/container";
 import axios from "axios";
-// import {} from "next/navigation"
-import { blogTableContent } from "../../../../stores/blogsTableStore";
 import { FC } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BlogContent from "@/components/BlogComp/BlogContent";
 import * as uuid from "uuid";
 import { Metadata } from "next";
-import { userAgent } from "next/server";
-import { headers } from "next/headers";
-import NewsCardMobileBlogPage from "@/components/NewsComp/NewsCardMobile";
+import { BlogI } from "../../../../stores/blogsStore";
+import Image from "next/image";
 
 async function getBlog(id: string) {
   const data = await axios
@@ -24,7 +19,7 @@ async function getBlog(id: string) {
       return { ok: false, data: err };
     });
 
-  return data as { ok: boolean; data: blogTableContent };
+  return data as { ok: boolean; data: BlogI };
 }
 
 interface BlogPageProps {
@@ -65,36 +60,35 @@ export async function generateMetadata({
 }
 
 const Page: FC<BlogPageProps> = async ({ params }) => {
-  const mobile =
-    userAgent({ headers: await headers() }).device.type == "mobile";
   const blog = await getBlog(params["blogId"] as string);
 
   return (
     <Container>
-      <section className="pt-40 w-full h-auto">
-        {mobile ? (
-          <NewsCardMobileBlogPage {...blog.data} />
-        ) : (
-          <Card>
-            <CardContent className="flex flex-row gap-[20px]">
-              <img
-                src={blog.data.avatar}
-                className="rounded-lg w-1/2 h-full"
-              ></img>
-              <div className="flex flex-col gap-[20px]">
-                <h4 className="text-[2rem] font-bold">{blog.data.title}</h4>
-                <p>{blog.data.description}</p>
-                <div className="flex flex-row items-center gap-[20px]">
-                  <Avatar>
-                    <AvatarImage src={blog.data.author.avatar}></AvatarImage>
-                    <AvatarFallback>A</AvatarFallback>
-                  </Avatar>
-                  <p>{blog.data.author.username}</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+      <section className="pt-50 w-full h-auto">
+        <div className="relative w-full h-300 overflow-hidden rounded-xl z-[-1]">
+          <div
+            style={{
+              backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${blog.data.avatar})`,
+            }}
+            className="absolute inset-0 bg-cover bg-center filter blur-md scale-110 brightness-50"
+          />
+
+          <div className="relative z-10 flex items-center justify-center h-full">
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${blog.data.avatar}`}
+              alt="main image"
+              width={1200}
+              height={1200}
+              className="h-full w-auto z-[-1]"
+            ></Image>
+          </div>
+        </div>
+        <h3 className="bg-none border-none w-[99%] h-auto h-[8rem] text-[4rem] resize-none font-bold">
+          {blog.data.title}
+        </h3>
+        <p className="bg-none border-none w-[99%] h-auto h-[4rem] text-[2rem] resize-none">
+          {blog.data.description}
+        </p>
       </section>
       <section className="pt-20 pb-20">
         <BlogContent

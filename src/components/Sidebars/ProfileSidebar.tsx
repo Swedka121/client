@@ -15,9 +15,9 @@ import {
 } from "../ui/sidebar";
 import { useIsAuthenticated } from "../../hooks/useIsAuthenticated";
 import {
+  FileJsonIcon,
   HomeIcon,
   ImageIcon,
-  MessageCircle,
   Newspaper,
   User,
 } from "lucide-react";
@@ -42,12 +42,12 @@ function ProfileSidebar() {
 
   const items: { title: string; url: string; icon: ElementType }[] = [
     { title: "Профіль", url: "/profile", icon: HomeIcon },
-    { title: "Мої коменти", url: "/profile/comments", icon: MessageCircle },
   ];
   const adminPanel: { title: string; url: string; icon: ElementType }[] = [
     { title: "Користувачі", url: "/profile/admin/users", icon: User },
     { title: "Блоги", url: "/profile/admin/blogs", icon: Newspaper },
     { title: "Галерея", url: "/profile/admin/gallery", icon: ImageIcon },
+    { title: "Ресурси", url: "/profile/admin/resources", icon: FileJsonIcon },
   ];
 
   async function onClickLogout() {
@@ -76,7 +76,7 @@ function ProfileSidebar() {
         {isAuthenticated ? (
           <Card>
             <CardContent className="flex flex-row items-center justify-center gap-[20px] size-full">
-              <Avatar>
+              <Avatar className="size-14">
                 <AvatarImage
                   src={
                     userStore.avatar == "default"

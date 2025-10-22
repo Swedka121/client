@@ -1,6 +1,5 @@
 export const dynamic = "force-dynamic";
 import ContactForm from "@/components/ContactForm";
-import NewsConatiner from "@/components/NewsComp/NewsContainer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Container from "@/components/ui/container";
@@ -8,10 +7,15 @@ import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import { Metadata } from "next";
 import axios from "axios";
-import { blogTableContent } from "../../stores/blogsTableStore";
 import MainHeader from "@/components/Headers/MainHeader";
 import Link from "next/link";
 import MainFooter from "@/components/Footers/MainFooter";
+import { BlogI } from "../../stores/blogsStore";
+import NewsCard from "@/components/NewsComp/NewsCard";
+import { userAgent } from "next/server";
+import { headers } from "next/headers";
+import { GalleryI } from "../../stores/galleryStore";
+import ImageResourceServer from "@/components/ResourcesSelectors/ImageResourceServer";
 
 export const metadata: Metadata = {
   title: "Lyceum №23",
@@ -35,26 +39,65 @@ async function getBlogs() {
       .catch(() => {
         return { data: [] };
       })
-  ).data as { _doc: blogTableContent }[];
+  ).data as BlogI[];
   while (data.length <= 8) {
     data.push({
-      _doc: {
-        _id: "none",
-        title: "Цеї новини ще немає",
-        description: "Опис для новини що немає ?_?",
-        author: { username: "Невідомий", avatar: "" },
-        avatar:
-          "https://i.fbcd.co/products/resized/resized-750-500/37-0a622f4a64fea4d65ea67779289cafdf1e36d2422807ca40e3798db4c9553910.jpg",
-        comments: 0,
-        content: [],
+      _id: "none",
+      title: "Цеї новини ще немає",
+      description: "Опис для новини що немає ?_?",
+      author: {
+        username: "Невідомий",
+        avatar: "68f89c9c09f7943802dfb005",
+        googleId: "",
       },
+      avatar: "68f89c9c09f7943802dfb005",
+      comments: 0,
+      content: [],
     });
   }
-  return data.map((el) => ({ ...el._doc }));
+  return data;
+}
+
+async function getGalleryMainCollection() {
+  const data = (await axios
+    .get("/gallery/Основна", {
+      baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    })
+    .then((data) => data.data)
+    .catch(() => {
+      return { data: [] };
+    })) as GalleryI;
+
+  while (data.images.length < 4) {
+    data.images.push({
+      _id: "68f89c9c09f7943802dfb005",
+      author: {
+        username: "Невідомий",
+        avatar: "68f89c9c09f7943802dfb005",
+        googleId: "",
+        email: "",
+        roles: ["user"],
+      },
+      mimeType: "image/jpeg",
+      path: "68f89c9c09f7943802dfb005",
+      real_name: "file",
+    });
+  }
+  data.images = data.images.map((el) => ({
+    ...el,
+    path: `${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el._id}`,
+  }));
+  return data;
 }
 
 export default async function Home() {
   const blogs = await getBlogs();
+  const gallery = await getGalleryMainCollection();
+  const mobile =
+    userAgent({ headers: await headers() }).device.type == "mobile";
   return (
     <>
       <MainHeader />
@@ -103,7 +146,7 @@ export default async function Home() {
                 </CardContent>
               </Card>
             </div>
-            <div className="max-md:w-full max-md:h-180 w-1/2 h-full flex items-center justify-center border-l-[20] border-(--foreground) max-md:border-l-[0]">
+            <div className="max-md:w-full max-md:h-180 w-1/2 h-full flex items-center justify-center border-l-[20] border-(--custom-color) max-md:border-l-[0]">
               <Image
                 className="w-1/2 h-full absolute z-[-10] right-[-20] brightness-60 rounded-l-[50] max-md:hidden"
                 src={"/assets/main.jpg"}
@@ -111,7 +154,7 @@ export default async function Home() {
                 height={600}
                 alt="main"
               ></Image>
-              <div className="w-1/2 h-full absolute right-0 z-[-11] bg-(--foreground) max-md:hidden"></div>
+              <div className="w-1/2 h-full absolute right-0 z-[-11] bg-(--custom-color) max-md:hidden"></div>
               <h2 className="w-full text-[19rem]/[18rem] tracking-tight pl-10 text-white max-md:text-[8rem]/[8rem] max-md:pl-0 max-md:font-bolder max-md:pt-10 max-md:pb-10 max-md:text-center max-md:w-full">
                 ЛІЦЕЙ 23 <br /> м. ЖИТОМИРА
               </h2>
@@ -121,7 +164,7 @@ export default async function Home() {
           </section>
         </Container>
         <section
-          className="bg-(--foreground) w-full h-[100vh] flex flex-row"
+          className="bg-(--custom-color) w-full h-[100vh] flex flex-row"
           id="about"
         >
           <div className="bg-white w-1/2 h-full flex justify-center items-center max-md:hidden">
@@ -171,19 +214,45 @@ export default async function Home() {
             </p>
           </div>
         </section>
-        <section className="w-full h-max pb-20 pt-20 bg-(--foreground) max-md:pt-20">
+        <section className="w-full h-max pb-20 pt-20 bg-(--custom-color) max-md:pt-20">
           <Container>
-            <h3 className="text-[6rem] font-[Conthic] text-white max-md:text-[4rem]/[4rem]">
+            <h3 className="text-[6rem] font-[Conthic] text-white max-md:text-[4rem]/[4rem] max-md:pb-4">
               НАШІ НОВИНИ ТА БЛОГИ
             </h3>
-            <NewsConatiner blogs={blogs} />
+            <div className="w-full h-160 grid grid-cols-4 auto-rows-fr gap-6 max-md:grid-cols-1 max-md:mt-4 max-md:h-max">
+              <NewsCard {...blogs[0]} />
+              <NewsCard {...blogs[1]} />
+              <NewsCard {...blogs[2]} />
+              <NewsCard {...blogs[3]} />
+              {mobile ? null : (
+                <>
+                  <NewsCard {...blogs[4]} />
+                  <NewsCard {...blogs[5]} />
+                  <NewsCard {...blogs[6]} />
+                  <NewsCard {...blogs[7]} />
+                </>
+              )}
+            </div>
+          </Container>
+        </section>
+        <section className="w-full h-max pb-20 pt-20 bg-(--custom-color) max-md:pt-20">
+          <Container>
+            <h3 className="text-[6rem] font-[Conthic] text-white max-md:text-[4rem]/[4rem] max-md:pb-4">
+              ГАЛЕРЕЯ
+            </h3>
+            <div className="w-full h-max grid grid-cols-2 grid-rows-2 max-md:grid-cols-1 max-md:grid-rows-4 gap-6">
+              <ImageResourceServer {...gallery.images[0]} />
+              <ImageResourceServer {...gallery.images[1]} />
+              <ImageResourceServer {...gallery.images[2]} />
+              <ImageResourceServer {...gallery.images[3]} />
+            </div>
           </Container>
         </section>
         <section
-          className="w-full h-max flex flex-row max-md:bg-(--foreground)"
+          className="w-full h-max min-h-[100vh] flex flex-row max-md:bg-(--custom-color)"
           id="contacts"
         >
-          <div className="w-1/2 h-full bg-(--foreground) p-8 flex flex-col items-center justify-center gap-[50px] max-md:w-full pt-30 pb-30">
+          <div className="w-1/2 h-full min-h-[100vh] bg-(--custom-color) max-md:w-full flex flex-col justify-center items-center gap-[50px]">
             <h3 className="h-full text-white font-[Conthic] text-[5rem]/[5rem] text-center max-md:text-[8rem]/[8rem] md:hidden">
               НАПИШИ НАМ
             </h3>
@@ -209,8 +278,8 @@ export default async function Home() {
               </CardContent>
             </Card>
           </div>
-          <div className="w-1/2 h-full flex items-center justify-center max-md:hidden pt-50 pb-50">
-            <h2 className="text-[20rem]/[18rem] text-center leading-none">
+          <div className="w-1/2 h-full min-h-[100vh] flex items-center justify-center max-md:hidden">
+            <h2 className="text-[20rem]/[18rem] text-center leading-none text-(--custom-color)">
               НАПИШИ <br /> НАМ
             </h2>
           </div>

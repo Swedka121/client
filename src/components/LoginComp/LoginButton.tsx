@@ -23,12 +23,12 @@ function LoginButton() {
     </Link>
   ) : (
     <Link className="ml-auto" href={"/profile"}>
-      <div className="flex flex-row items-center algin-center gap-[20px] ml-auto">
-        <Avatar>
+      <div className="flex flex-row items-center justify-center gap-[20px] ml-auto h-15">
+        <Avatar className="size-12">
           <AvatarImage src={userStore.avatar as string}></AvatarImage>
           <AvatarFallback>A</AvatarFallback>
         </Avatar>
-        <p className="text-[0.8rem] font-[Montserrat] text-black font-medium">
+        <p className="text-[1rem] font-[Montserrat] text-black font-medium h-max">
           {userStore.username}
         </p>
       </div>

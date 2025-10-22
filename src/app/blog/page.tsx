@@ -1,11 +1,8 @@
 export const dynamic = "force-dynamic";
 import Container from "@/components/ui/container";
 import axios from "axios";
-import { blogTableContent } from "../../../stores/blogsTableStore";
-import NewsCard3 from "@/components/NewsComp/NewsCard3";
-import { userAgent } from "next/server";
-import { headers } from "next/headers";
-import NewsCardMobile from "@/components/NewsComp/NewsCardMobile";
+import { BlogI } from "../../../stores/blogsStore";
+import NewsCard from "@/components/NewsComp/NewsCard";
 
 export async function getBlogs() {
   const data = (
@@ -17,25 +14,19 @@ export async function getBlogs() {
       .catch(() => {
         return { data: [] };
       })
-  ).data as { _doc: blogTableContent }[];
-  console.log(data);
-  return data.map((el) => ({ ...el._doc }));
+  ).data as BlogI[];
+  return data;
 }
 
 async function Page() {
-  const blogs = await getBlogs();
-  const mobile =
-    userAgent({ headers: await headers() }).device.type == "mobile";
+  const blogs = (await getBlogs()) as BlogI[];
+
   return (
     <Container>
-      <section className="w-full h-auto flex flex-row flex-wrap gap-[20px] pt-50 min-h-[100vh]">
-        {blogs.map((el) =>
-          mobile ? (
-            <NewsCardMobile {...el} key={el._id} />
-          ) : (
-            <NewsCard3 key={el._id} {...el} />
-          )
-        )}
+      <section className="w-full h-auto grid grid-cols-4 auto-rows-fr max-md:grid-cols-1 gap-4 pt-50 min-h-[100vh]">
+        {blogs.map((el) => (
+          <NewsCard key={el._id} {...el} />
+        ))}
       </section>
     </Container>
   );

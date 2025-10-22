@@ -10,7 +10,7 @@ function MainFooter() {
         <div className="grid grid-cols-2 grid-rows-1">
           <div className="w-auto h-full">
             <div className="flex flex-row items-center justify-start gap-[10px] h-25 w-content">
-              <Avatar className="w-[35px] h-[35px]">
+              <Avatar className="size-16">
                 <AvatarImage
                   src="/assets/logo.png"
                   width={60}
@@ -18,7 +18,7 @@ function MainFooter() {
                 ></AvatarImage>
                 <AvatarFallback>L</AvatarFallback>
               </Avatar>
-              <p className="font-[Montserrat] text-[1.7rem] text-white font-bold h-[20px]">
+              <p className="font-[Montserrat] text-[1.7rem] text-white font-bold h-auto text-center">
                 Ліцей №23
               </p>
             </div>
@@ -36,6 +36,9 @@ function MainFooter() {
               <Link className="text-white h-max w-full" href={"/blog"}>
                 - Блоги
               </Link>
+              <Link className="text-white h-max w-full" href={"/gallery"}>
+                - Галерея
+              </Link>
               <Link className="text-white h-max w-full" href={"/privacy"}>
                 - Privacy Policy
               </Link>
@@ -43,7 +46,7 @@ function MainFooter() {
                 - Terms of Use
               </Link>
             </div>
-            <p className="mt-50">
+            <p className="mt-50 text-white">
               © 2025 Swedka121 — Designed & Developed. All rights reserved.
             </p>
           </div>

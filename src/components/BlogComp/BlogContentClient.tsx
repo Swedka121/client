@@ -1,8 +1,9 @@
-import { FileIcon } from "lucide-react";
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
 import { Card, CardContent } from "../ui/card";
+import { FileIcon } from "lucide-react";
 
 function getBlogComponent(data: {
   type: "title" | "paragraph" | "image" | "video" | "file";
@@ -27,7 +28,7 @@ function getBlogComponent(data: {
             className="absolute inset-0 bg-cover bg-center filter blur-md scale-110 brightness-50"
           />
 
-          <div className="relative z-1 flex items-center justify-center h-full">
+          <div className="relative z-10 flex items-center justify-center h-full">
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${data.data}`}
               alt="main image"
@@ -56,7 +57,7 @@ function getBlogComponent(data: {
   }
 }
 
-function BlogContent({
+function BlogContentClient({
   content,
   Wrapper,
 }: {
@@ -74,16 +75,16 @@ function BlogContent({
   }) => ReactNode;
 }) {
   return Wrapper != null ? (
-    <section className="flex flex-col gap-[20px]">
+    <section className="flex flex-col gap-[20px] w-full">
       {content.map((el) =>
         Wrapper({ children: getBlogComponent(el), id: el.id })
       )}
     </section>
   ) : (
-    <section className="flex flex-col gap-[20px]">
+    <section className="flex flex-col gap-[20px] w-full">
       {content.map((el) => getBlogComponent(el))}
     </section>
   );
 }
 
-export default BlogContent;
+export default BlogContentClient;

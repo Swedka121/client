@@ -9,12 +9,12 @@ function ProfileCard() {
   const userStore = useUserStore();
   const isAuthenticated = useIsAuthenticated();
   return isAuthenticated ? (
-    <Card>
-      <CardContent className="flex flex-row items-center">
+    <Card className="w-max p-4">
+      <CardContent className="flex flex-row items-center w-max">
         <Image
           width={600}
           height={600}
-          className="w-1/2 h-auto rounded-full p-10"
+          className="w-[15rem] h-auto rounded-full p-10"
           alt="avatar"
           src={userStore.avatar as string}
         ></Image>
