@@ -4,7 +4,7 @@ import axios from "axios";
 import { BlogI } from "../../../stores/blogsStore";
 import NewsCard from "@/components/NewsComp/NewsCard";
 
-export async function getBlogs() {
+async function getBlogs() {
   const data = (
     await axios
       .get("/blog/", {

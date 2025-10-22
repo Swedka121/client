@@ -24,9 +24,9 @@ async function getBlog(id: string) {
 
 export async function generateMetadata({
   params,
-}:
-  | { params: Promise<{ blogId: string }> }
-  | { params: { blogId: string } }): Promise<Metadata> {
+}: {
+  params: Promise<{ blogId: string }>;
+}): Promise<Metadata> {
   const blog = await getBlog((await params).blogId);
 
   if (!blog.ok)
@@ -60,9 +60,9 @@ export async function generateMetadata({
 async function Page({
   params,
 }: {
-  params: { blogId: string };
+  params: Promise<{ blogId: string }>;
 }): Promise<JSX.Element> {
-  const blog = await getBlog(params["blogId"] as string);
+  const blog = await getBlog((await params).blogId as string);
 
   if (!blog.ok || !blog.data) {
     return (
