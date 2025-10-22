@@ -28,7 +28,7 @@ const items: { title: string; url: string; icon: ElementType }[] = [
   { title: "Про нас", url: "/#about", icon: CircleQuestionMarkIcon },
   { title: "Контакти", url: "/#contacts", icon: Phone },
   { title: "Блог", url: "/blog", icon: Newspaper },
-  { title: "Блог", url: "/gallery", icon: ImageIcon },
+  { title: "Галерея", url: "/gallery", icon: ImageIcon },
 ];
 
 function MenuSidebar() {
