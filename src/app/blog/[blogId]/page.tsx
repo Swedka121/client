@@ -24,10 +24,10 @@ async function getBlog(id: string) {
 
 export async function generateMetadata({
   params,
-}: {
-  params: { blogId: string };
-}): Promise<Metadata> {
-  const blog = await getBlog(params.blogId);
+}:
+  | { params: Promise<{ blogId: string }> }
+  | { params: { blogId: string } }): Promise<Metadata> {
+  const blog = await getBlog((await params).blogId);
 
   if (!blog.ok)
     return {
