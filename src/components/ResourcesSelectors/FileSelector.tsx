@@ -57,19 +57,21 @@ function FileSelector({
               }}
             ></Input>
             {resourcesStore.getFiltredFiles(filterId).length > 0 ? (
-              <div className="grid grid-cols-6 auto-rows-fr gap-4 h-auto overflow-y-scroll p-4">
-                {resourcesStore.getFiltredFiles(filterId).map((el) => (
-                  <FileResource
-                    key={el._id}
-                    real_name={el.real_name}
-                    author={el.author}
-                    click={() => {
-                      setIsSuccess(true);
-                      callbackSuccess(el._id);
-                      setIsDialogOpen(false);
-                    }}
-                  />
-                ))}
+              <div className="w-full h-max overflow-y-scroll">
+                <div className="grid grid-cols-6 auto-rows-fr gap-4 h-auto p-4">
+                  {resourcesStore.getFiltredFiles(filterId).map((el) => (
+                    <FileResource
+                      key={el._id}
+                      real_name={el.real_name}
+                      author={el.author}
+                      click={() => {
+                        setIsSuccess(true);
+                        callbackSuccess(el._id);
+                        setIsDialogOpen(false);
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             ) : (
               <div className="w-full h-full flex items-center justify-center flex-col gap-[20px]">

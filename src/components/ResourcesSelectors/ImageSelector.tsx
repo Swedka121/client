@@ -57,18 +57,20 @@ function ImageSelector({
               }}
             ></Input>
             {resourcesStore.getFiltredImages(filterId).length > 0 ? (
-              <div className="grid grid-cols-6 auto-rows-fr gap-4 h-auto overflow-y-scroll p-4">
-                {resourcesStore.getFiltredImages(filterId).map((el) => (
-                  <ImageResource
-                    key={el._id}
-                    path={el.path}
-                    click={() => {
-                      setIsSuccess(true);
-                      callbackSuccess(el._id);
-                      setIsDialogOpen(false);
-                    }}
-                  />
-                ))}
+              <div className="w-full h-max overflow-y-scroll">
+                <div className="grid grid-cols-6 auto-rows-fr gap-4 h-auto p-4">
+                  {resourcesStore.getFiltredImages(filterId).map((el) => (
+                    <ImageResource
+                      key={el._id}
+                      path={el.path}
+                      click={() => {
+                        setIsSuccess(true);
+                        callbackSuccess(el._id);
+                        setIsDialogOpen(false);
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             ) : (
               <div className="w-full h-full flex items-center justify-center flex-col gap-[20px]">

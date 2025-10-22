@@ -42,18 +42,24 @@ function Page() {
           {Array.from(blogsStore.blogs.values()).map((el) => (
             <Card key={el._id}>
               <CardHeader className="flex flex-row gap-4 relative">
-                <div className="overflow-hidden rounded-lg w-1/2 h-60 flex items-center justify-center bg-500-gray">
+                <div className="relative overflow-hidden rounded-lg w-1/2 h-60 flex items-center justify-center">
+                  <div
+                    className="w-full h-full"
+                    style={{
+                      backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el.avatar})`,
+                    }}
+                  ></div>
                   <Image
                     src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el.avatar}`}
                     width={800}
                     height={800}
                     alt="image"
-                    className="h-60 w-auto"
+                    className="h-60 w-auto object-cover z-[1]"
                   ></Image>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-1/2">
                   <CardTitle className="max-h-20">{el.title}</CardTitle>
-                  <CardDescription className="max-h-20">
+                  <CardDescription className="max-h-18 mt-2">
                     {el.description}
                   </CardDescription>
                   <div className="flex flex-row items-center absolute bottom-0">
