@@ -28,18 +28,17 @@ export const metadata: Metadata = {
 // import * as uuid from "uuid";
 
 async function getBlogs() {
-  const data = (
-    await axios
-      .get("/blog/", {
-        baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
-        headers: {
-          "Cache-Control": "no-cache",
-        },
-      })
-      .catch(() => {
-        return { data: [] };
-      })
-  ).data as BlogI[];
+  const data = (await axios
+    .get("/blog/", {
+      baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    })
+    .then((data) => data.data)
+    .catch(() => {
+      return [];
+    })) as BlogI[];
   while (data.length <= 8) {
     data.push({
       _id: "none",
@@ -68,7 +67,7 @@ async function getGalleryMainCollection() {
     })
     .then((data) => data.data)
     .catch(() => {
-      return { data: [] };
+      return { name: "Основна", images: [] };
     })) as GalleryI;
 
   while (data.images.length < 4) {
