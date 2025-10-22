@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
         port: "4000",
         pathname: "/resources/**",
       },
+      {
+        protocol: "https",
+        hostname: "apis.swedka121.com",
+        port: "",
+        pathname: "/school/resources/**",
+      },
     ],
   },
 };
