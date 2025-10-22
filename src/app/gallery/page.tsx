@@ -15,7 +15,7 @@ async function getAllCollections() {
     })
     .then((data) => data.data)
     .catch(() => {
-      return { data: [] };
+      return [];
     });
 
   return data;
