@@ -15,19 +15,23 @@ function NewsCard(el: {
       <Card key={el._id} className="w-full h-full">
         <CardHeader className="flex flex-row gap-4 relative">
           <div className="relative overflow-hidden rounded-lg w-1/2 h-60 flex items-center justify-center">
-            <div
-              className="w-full h-full"
-              style={{
-                backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el.avatar})`,
-              }}
-            ></div>
-            <Image
-              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el.avatar}`}
-              width={800}
-              height={800}
-              alt="image"
-              className="h-60 w-auto object-cover z-[1]"
-            ></Image>
+            <div className="relative overflow-hidden rounded-lg w-1/2 h-60 flex items-center justify-center">
+              <div
+                className="absolute inset-0 bg-cover bg-center filter blur-md scale-110 brightness-50"
+                style={{
+                  backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el.avatar})`,
+                }}
+              ></div>
+              <div className="relative z-10 flex items-center justify-center h-full">
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el.avatar}`}
+                  width={800}
+                  height={800}
+                  alt="image"
+                  className="h-60 w-auto object-cover z-[1]"
+                ></Image>
+              </div>
+            </div>
           </div>
           <div className="flex flex-col w-1/2">
             <CardTitle className="max-h-20">{el.title}</CardTitle>
