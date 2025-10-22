@@ -1,11 +1,11 @@
 import Container from "@/components/ui/container";
 import axios from "axios";
-import { FC } from "react";
 import BlogContent from "@/components/BlogComp/BlogContent";
 import * as uuid from "uuid";
 import { Metadata } from "next";
 import { BlogI } from "../../../../stores/blogsStore";
 import Image from "next/image";
+import { JSX } from "react";
 
 async function getBlog(id: string) {
   const data = await axios
@@ -22,13 +22,11 @@ async function getBlog(id: string) {
   return data as { ok: boolean; data: BlogI };
 }
 
-interface BlogPageProps {
-  params: { blogId: string };
-}
-
 export async function generateMetadata({
   params,
-}: BlogPageProps): Promise<Metadata> {
+}: {
+  params: { blogId: string };
+}): Promise<Metadata> {
   const blog = await getBlog(params.blogId);
 
   if (!blog.ok)
@@ -59,8 +57,22 @@ export async function generateMetadata({
   };
 }
 
-const Page: FC<BlogPageProps> = async ({ params }) => {
+async function Page({
+  params,
+}: {
+  params: { blogId: string };
+}): Promise<JSX.Element> {
   const blog = await getBlog(params["blogId"] as string);
+
+  if (!blog.ok || !blog.data) {
+    return (
+      <Container>
+        <section className="pt-50 w-full h-auto">
+          <h3 className="text-3xl font-bold">Blog not found</h3>
+        </section>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -99,6 +111,6 @@ const Page: FC<BlogPageProps> = async ({ params }) => {
       </section>
     </Container>
   );
-};
+}
 
 export default Page;
