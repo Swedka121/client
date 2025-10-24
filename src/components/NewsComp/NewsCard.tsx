@@ -14,20 +14,20 @@ function NewsCard(el: {
     <Link className="w-[1fr] h-75" href={`/blog/${el._id}`}>
       <Card key={el._id} className="w-full h-full">
         <CardHeader className="flex flex-row gap-4 relative">
-          <div className="relative overflow-hidden rounded-lg w-1/2 h-60 flex items-center justify-center">
+          <div className="relative overflow-hidden rounded-lg w-1/2 h-60 flex items-center justify-center z-1">
             <div
               className="absolute inset-0 bg-cover bg-center filter blur-md scale-110 brightness-50"
               style={{
                 backgroundImage: `url(${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el.avatar})`,
               }}
             ></div>
-            <div className="relative z-10 flex items-center justify-center h-full">
+            <div className="relative z-2 flex items-center justify-center h-full">
               <Image
                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${el.avatar}`}
                 width={800}
                 height={800}
                 alt="image"
-                className="h-60 w-auto object-cover z-[1]"
+                className="h-60 w-auto object-cover"
               ></Image>
             </div>
           </div>

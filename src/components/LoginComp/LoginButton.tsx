@@ -17,7 +17,7 @@ function LoginButton() {
   return !isAuthicated ? (
     <Link
       href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/start`}
-      className="justify-self-end ml-auto"
+      className="justify-self-end ml-auto h-15 flex items-center"
     >
       <Button>Login with google</Button>
     </Link>

@@ -42,8 +42,11 @@ function getBlogComponent(data: {
     }
     case "file": {
       return (
-        <Link href={data.data} download={true}>
-          <Card>
+        <Link
+          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/resources/${data.data}`}
+          download={true}
+        >
+          <Card className="w-200">
             <CardContent className="flex flex-row justify-between items-center">
               <FileIcon />
               <p>{data.data}</p>

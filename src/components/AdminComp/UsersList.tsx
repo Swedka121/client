@@ -1,8 +1,5 @@
 "use client";
-import { useEffect } from "react";
-
-import { useApi } from "../../hooks/useApi";
-import { useRequester } from "../../hooks/useRequester";
+import { useEffect, useTransition } from "react";
 import UsersTable from "./UsersTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "../ui/badge";
@@ -29,6 +26,7 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "../ui/dialog";
+import { Spinner } from "../ui/spinner";
 
 const columns: ColumnDef<tableContent>[] = [
   {
@@ -63,43 +61,18 @@ const columns: ColumnDef<tableContent>[] = [
     cell: function Cell({ row }) {
       const userStore = useUserStore();
       const tableStore = useUsersTableStore();
-      const { endRequest, getRequester } = useRequester();
 
       async function addAdmin() {
-        if (!getRequester().isAuth) return;
-        await getRequester()
-          .instance.put(
-            `/user/role?googleId=${row.original.googleId}&role=admin`
-          )
-          .then(() => tableStore.addRole("admin", row.original.googleId))
-          .then(() => endRequest());
+        await tableStore.addRole("admin", row.original.googleId);
       }
       async function removeAdmin() {
-        if (!getRequester().isAuth) return;
-        await getRequester()
-          .instance.delete(
-            `/user/role?googleId=${row.original.googleId}&role=admin`
-          )
-          .then(() => tableStore.deleteRole("admin", row.original.googleId))
-          .then(() => endRequest());
+        await tableStore.deleteRole("admin", row.original.googleId);
       }
       async function addManager() {
-        if (!getRequester().isAuth) return;
-        await getRequester()
-          .instance.put(
-            `/user/role?googleId=${row.original.googleId}&role=manager`
-          )
-          .then(() => tableStore.addRole("manager", row.original.googleId))
-          .then(() => endRequest());
+        await tableStore.addRole("manager", row.original.googleId);
       }
       async function deleteManager() {
-        if (!getRequester().isAuth) return;
-        await getRequester()
-          .instance.delete(
-            `/user/role?googleId=${row.original.googleId}&role=manager`
-          )
-          .then(() => tableStore.deleteRole("manager", row.original.googleId))
-          .then(() => endRequest());
+        await tableStore.deleteRole("manager", row.original.googleId);
       }
 
       return (
@@ -151,13 +124,9 @@ const columns: ColumnDef<tableContent>[] = [
     cell: function Cell({ row }) {
       const userStore = useUserStore();
       const tableStore = useUsersTableStore();
-      const { endRequest, getRequester } = useRequester();
 
       async function deleteUser() {
-        await getRequester()
-          .instance.delete(`/user?googleId=${row.original.googleId}`)
-          .then(() => tableStore.deleteUser(row.original.googleId))
-          .then(() => endRequest());
+        await tableStore.deleteUser(row.original.googleId);
       }
 
       return (
@@ -201,35 +170,23 @@ const columns: ColumnDef<tableContent>[] = [
 
 function UserList() {
   const usersTableStore = useUsersTableStore();
-  const { getRequester, endRequest } = useRequester();
-  const [response, fetchFunction] = useApi<tableContent[]>(async () => {
-    const requester = getRequester();
-    const data = (await requester.instance.get("/user")) as tableContent[];
-    usersTableStore.setTableData(data);
-    setTimeout(endRequest, 1000);
-    return data;
-  });
+  const transition = useTransition();
 
   useEffect(() => {
-    if (getRequester().isAuth) {
-      fetchFunction();
-      console.log("fetch");
-    }
-  }, [getRequester().isAuth]);
+    transition[1](() => {
+      usersTableStore.load();
+    });
+  }, []);
 
-  return !response.isFetching ? (
-    response.error != "" ? (
-      <div className="overflow-hidden w-full">
-        <UsersTable<tableContent>
-          columns={columns}
-          data={usersTableStore.table_data || []}
-        />
-      </div>
-    ) : (
-      <p>Error...</p>
-    )
+  return !transition[0] ? (
+    <div className="overflow-hidden w-full">
+      <UsersTable<tableContent>
+        columns={columns}
+        data={usersTableStore.table_data || []}
+      />
+    </div>
   ) : (
-    <p>Loading...</p>
+    <Spinner />
   );
 }
 

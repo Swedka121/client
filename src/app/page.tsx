@@ -18,13 +18,40 @@ import { GalleryI } from "../../stores/galleryStore";
 import ImageResourceServer from "@/components/ResourcesSelectors/ImageResourceServer";
 
 export const metadata: Metadata = {
-  title: "Lyceum №23",
-  description: "Site of Lyceum №23 of Zhytomyr",
-  keywords: ["Lyzeum", "Blogs", "Zhytomyr", "Gallery", "Swedka121"],
+  title: "Ліцей №23 м. Житомир — офіційний сайт",
+  description:
+    "Офіційний сайт Ліцею №23 міста Житомир. Новини, блоги, галерея.",
+  keywords: [
+    "Ліцей 23 Житомир",
+    "школа Житомир",
+    "Ліцей №23 офіційний сайт",
+    "Житомир освіта",
+    "Ліцей №23 учні",
+    "блог учнів Житомир",
+    "галерея Ліцею №23",
+  ],
   openGraph: {
+    title: "Ліцей №23 м. Житомир — офіційний сайт",
+    description:
+      "Відкрийте Ліцей №23 міста Житомир — новини, блоги, фотогалерея та учнівські проєкти.",
+    url: "https://lyceum23.swedka121.com",
+    siteName: "Ліцей №23 м. Житомир",
+    images: ["/assets/logo.png"],
+    locale: "uk_UA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ліцей №23 м. Житомир — офіційний сайт",
+    description:
+      "Офіційний сайт Ліцею №23 у Житомирі: новини, блоги, галерея та більше.",
     images: ["/assets/logo.png"],
   },
+  alternates: {
+    canonical: "https://lyceum23.swedka121.com",
+  },
 };
+
 // import * as uuid from "uuid";
 
 async function getBlogs() {
@@ -106,9 +133,10 @@ export default async function Home() {
             <Image
               className="md:hidden absolute w-full h-[100vh] top-0 left-0 z-[-100]"
               src={"/assets/main.jpg"}
-              width={500}
+              width={120}
               height={600}
               alt="main"
+              priority
             ></Image>
             <div className="w-1/2 flex justify-center items-center max-md:w-full max-md:h-max max-md:pt-30 max-md:pb-30">
               <Card className="w-[15vw] h-auto font-[Montserrat] max-md:w-[300px] max-md:h-max">
