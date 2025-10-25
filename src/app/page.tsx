@@ -294,12 +294,12 @@ export default async function Home() {
               <CardContent>
                 <p>
                   <span className="flex flex-row items-center gap-[20px]">
-                    - <Phone className="w-[2rem]" /> +380 63 000 0000
+                    - <Phone className="w-[2rem]" /> +380969268529
                   </span>
 
                   <br />
                   <span className="flex flex-row items-center gap-[20px]">
-                    - <Mail className="w-[2rem]" /> my.mail@gmail.com
+                    - <Mail className="w-[2rem]" /> eugen.zakusilo@gmail.com
                   </span>
                 </p>
               </CardContent>
