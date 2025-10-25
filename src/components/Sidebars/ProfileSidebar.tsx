@@ -26,7 +26,6 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { Card, CardContent } from "../ui/card";
 import { useRouter } from "next/navigation";
-import { useRequester } from "@/hooks/useRequester";
 
 function ProfileSidebar() {
   const userStore = useUserStore();
@@ -37,9 +36,6 @@ function ProfileSidebar() {
   useEffect(() => {
     sidebar.setOpen(true);
   });
-
-  const { getRequester, endRequest } = useRequester();
-
   const items: { title: string; url: string; icon: ElementType }[] = [
     { title: "Профіль", url: "/profile", icon: HomeIcon },
   ];
@@ -51,18 +47,9 @@ function ProfileSidebar() {
   ];
 
   async function onClickLogout() {
-    if (!getRequester().isAuth) return;
-    await getRequester()
-      .instance.get("/auth/logout")
-      .then(() => {
-        userStore.logout();
-      })
-      .then(() => {
-        endRequest();
-      })
-      .then(() => {
-        router.push("/");
-      });
+    userStore.logout().then(() => {
+      router.push("/");
+    });
   }
   return (
     <Sidebar>

@@ -2,6 +2,7 @@
 
 import axios, { Axios, AxiosError, AxiosRequestConfig } from "axios";
 import { jwtDecode } from "jwt-decode";
+import { toast } from "sonner";
 import { create } from "zustand";
 
 interface jwtDecodeValue {
@@ -27,7 +28,7 @@ interface userStore {
   isAuthenticated: () => Promise<boolean>;
   getAccessToken: () => Promise<string>;
   getAuthorizedClient: () => Promise<Axios>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 export const useUserStore = create<userStore>((set, get) => ({
@@ -70,15 +71,24 @@ export const useUserStore = create<userStore>((set, get) => ({
     }
     return true;
   },
-  logout: () => {
-    set(() => ({
-      accessToken: null,
-      avatar: null,
-      email: null,
-      googleId: null,
-      roles: null,
-      username: null,
-    }));
+  logout: async () => {
+    const client = await get().getAuthorizedClient();
+    await client
+      .get("/auth/logout")
+      .then(() => {
+        set(() => ({
+          accessToken: null,
+          avatar: null,
+          email: null,
+          googleId: null,
+          roles: null,
+          username: null,
+        }));
+      })
+      .catch(() => {
+        toast.error("Нам не вдалося вийти з вашого аккаунту!");
+        return Promise.reject();
+      });
   },
   async getAccessToken() {
     const isAuthenticated = await get().isAuthenticated();
