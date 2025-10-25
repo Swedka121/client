@@ -30,7 +30,9 @@ async function Page() {
         <section className="w-full h-max flex flex-col gap-4 pt-50 min-h-[100vh]">
           {collections.map((el) => (
             <div key={el.name} className="flex flex-col w-full h-max">
-              <h3 className="w-full text-start h-max text-[2rem]">{el.name}</h3>
+              <h3 className="w-full text-start h-max text-[3rem] font-bold pt-10 pb-10">
+                {el.name}
+              </h3>
               <div className="w-full grid grid-cols-4 auto-rows-fr gap-4 max-md:grid-cols-1">
                 {el.images.map((el2) => (
                   <ImageResourceServer

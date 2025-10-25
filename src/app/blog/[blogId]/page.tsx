@@ -67,7 +67,7 @@ async function Page({
   if (!blog.ok || !blog.data) {
     return (
       <Container>
-        <section className="pt-50 w-full h-auto">
+        <section className="pt-50 w-full h-auto min-h-[100vh]">
           <h3 className="text-3xl font-bold">Blog not found</h3>
         </section>
       </Container>
@@ -91,7 +91,7 @@ async function Page({
               alt="main image"
               width={1200}
               height={1200}
-              className="h-full w-auto z-[-1]"
+              className="h-full w-auto z-[-1] max-md:object-contain"
             ></Image>
           </div>
         </div>

@@ -8,7 +8,7 @@ function ImageResourceServer({ path }: { path: string }) {
         alt="image"
         width={800}
         height={800}
-        className="absolute h-full w-auto object-cover"
+        className="absolute h-full w-auto md:object-cover object-contain"
       ></Image>
     </div>
   );

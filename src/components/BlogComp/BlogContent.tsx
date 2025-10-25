@@ -14,7 +14,9 @@ function getBlogComponent(data: {
     }
     case "paragraph": {
       return (
-        <p className="w-full background-gray-100 text-[1rem]">{data.data}</p>
+        <p className="w-full background-gray-100 text-[1rem] max-md:text-[1.5rem]">
+          {data.data}
+        </p>
       );
     }
     case "image": {
@@ -33,7 +35,7 @@ function getBlogComponent(data: {
               alt="main image"
               width={1200}
               height={1200}
-              className="h-full w-auto"
+              className="h-full w-auto max-md:object-contain"
             ></Image>
           </div>
         </div>

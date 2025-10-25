@@ -23,7 +23,7 @@ async function Page() {
 
   return (
     <Container>
-      <section className="w-full h-auto grid grid-cols-4 auto-rows-fr max-md:grid-cols-1 gap-4 pt-50 min-h-[100vh]">
+      <section className="w-full h-auto grid grid-cols-4 auto-rows-fr max-md:grid-cols-1 gap-4 pt-50 pb-50">
         {blogs.map((el) => (
           <NewsCard key={el._id} {...el} />
         ))}

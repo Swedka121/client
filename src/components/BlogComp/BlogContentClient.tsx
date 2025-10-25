@@ -15,7 +15,9 @@ function getBlogComponent(data: {
     }
     case "paragraph": {
       return (
-        <p className="w-full background-gray-100 text-[1rem]">{data.data}</p>
+        <p className="w-full background-gray-100 text-[1rem] ">
+          {data.data}
+        </p>
       );
     }
     case "image": {

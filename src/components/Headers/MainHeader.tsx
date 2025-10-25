@@ -18,7 +18,7 @@ async function MainHeader() {
   const mobile =
     userAgent({ headers: await headers() }).device.type == "mobile";
   return mobile ? (
-    <header className="h-25 w-full bg-(--header-foreground) fixed z-[1]">
+    <header className="h-25 w-full bg-(--header-foreground) fixed z-[3]">
       <Container>
         <div className="flex flex-row w-full h-full justify-between items-center">
           <div className="flex flex-row items-center justify-start gap-[10px] h-25 w-content">
@@ -39,7 +39,7 @@ async function MainHeader() {
       </Container>
     </header>
   ) : (
-    <header className="mt-[50px] fixed w-[100%] z-[2]">
+    <header className="mt-[50px] fixed w-[100%] z-[3]">
       <div className="w-[90%] m-auto">
         <Card>
           <CardContent className="flex flex-row itrems-center gap-[50px]">
