@@ -1,0 +1,16 @@
+{
+  "en": {
+    "header_home_tab": "Home",
+    "header_settings_tab": "Settings",
+    "header_profile_tab": "Profile",
+    "settings_setting_name_theme": "Theme",
+    "settings_setting_name_language": "Language",
+    "settings_setting_value_theme_on": "On Dark mode",
+    "settings_setting_value_theme_off": "On Light mode",
+    "settings_setting_value_language_on": "English (US)",
+    "settings_setting_value_language_off": "Ukrainian (UA)",
+    "page_setting_title": "Settings",
+    "page_profile_title": "Profile",
+    "page_home_title": "Welcome, %s1%!"
+  }
+}

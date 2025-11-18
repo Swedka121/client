@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Main;
+  src: url("/fonts/Main.ttf");
+}
+
+@font-face {
+  font-family: Deco;
+  src: url("/fonts/Deco.ttf");
+}
+@theme {
+  --breakpoint-3xl: 120rem;
+  --breakpoint-4xl: 140rem;
+}
+
+body {
+  font-family: Main;
+  margin: 0;
+  padding: 0;
+  background: var(--white-main);
+  color: var(--black-main);
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.light {
+  --tint-color: #833ae2;
+  --main-color: #6d13e2;
+}
+
+.dark {
+  --black-main: #f2f2f2;
+  --white-main: #2f2f2f;
+  --main-color: #965be2;
+  --tint-color: #7a40c7;
+  --main-color-rgb: 150, 87, 231;
+}
+
+:root {
+  --main-color-rgb: 109, 19, 226;
+  --tint-1:
+    rgba(var(--main-color-rgb), 0.1) 0px 8px 24px,
+    rgba(var(--main-color-rgb), 0.1) 0px 16px 56px,
+    rgba(var(--main-color-rgb), 0.1) 0px 24px 80px;
+  --white-main: #f2f2f2;
+  --black-main: #2f2f2f;
+  --main-color: #6d13e2;
+  --secd-color: #e27713;
+  --tint-color: #833ae2;
+  --static-white-main: #f2f2f2;
+  --static-black-main: #2f2f2f;
+}
+
+.markdown-container {
+  font-family: Main;
+  color: var(--black-main);
+}
+
+/* Headings */
+.markdown-container h1 {
+  font-family: Deco;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.markdown-container h2 {
+  font-family: Deco;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-container h3 {
+  font-family: Deco;
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Paragraphs */
+.markdown-container p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Links */
+.markdown-container a {
+  color: var(--main-color);
+  text-decoration: underline;
+}
+
+/* Lists */
+.markdown-container ul,
+.markdown-container ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Blockquotes */
+.markdown-container blockquote {
+  border-left: 4px solid var(--main-color);
+  padding-left: 1rem;
+  color: var(--black-main);
+  font-style: italic;
+  background: var(--tint-1);
+  margin-bottom: 1rem;
+}
+
+/* Code blocks */
+.markdown-container code {
+  font-family: monospace;
+  background-color: rgba(var(--main-color-rgb), 0.05);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.markdown-container pre {
+  background-color: rgba(var(--main-color-rgb), 0.05);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+/* Images */
+.markdown-container img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Tables */
+.markdown-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.markdown-container th,
+.markdown-container td {
+  border: 1px solid var(--secd-color);
+  padding: 0.5rem;
+}
+
+/* Inline emphasis */
+.markdown-container strong {
+  font-weight: bold;
+}
+
+.markdown-container em {
+  font-style: italic;
+}
+
+.markdown-container img {
+  max-width: 100%; /* Make image responsive to container */
+  height: auto; /* Keep aspect ratio */
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* Center image */
+}
+
+/* Optional: limit width for very large images */
+.markdown-container img {
+  max-width: 80%; /* Images won’t exceed 80% of container */
+}
