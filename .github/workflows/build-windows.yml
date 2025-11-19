@@ -12,10 +12,6 @@ jobs:
     runs-on: windows-latest
 
     # Визначаємо шлях до вашої Electron-частини (client)
-    defaults:
-      run:
-        working-directory: client
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
