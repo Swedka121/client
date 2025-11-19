@@ -23,7 +23,7 @@ jobs:
           node-version: "20"
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm ci --force
 
       # 2. Видалено кроки "Install Wine and Mono", оскільки Windows-раннер цього не потребує.
       # Усі необхідні .NET та Windows-бінарники доступні нативно.
