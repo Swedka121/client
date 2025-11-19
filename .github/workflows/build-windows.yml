@@ -25,11 +25,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-          cache-dependency-path: "client/package-lock.json"
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       # 2. Видалено кроки "Install Wine and Mono", оскільки Windows-раннер цього не потребує.
       # Усі необхідні .NET та Windows-бінарники доступні нативно.
