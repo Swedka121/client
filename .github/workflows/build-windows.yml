@@ -38,6 +38,10 @@ jobs:
         shell: powershell
         run: npm run make -- --platform=win32
 
+      - name: List Windows Installer Directory for Debug
+        shell: powershell
+        run: dir out/make/squirrel.windows
+
       # 4. Пошук збудованого інсталятора Squirrel
       # Файли Squirrel Maker зазвичай знаходяться у out/make/squirrel.windows/
       - name: Find and Upload Artifact
