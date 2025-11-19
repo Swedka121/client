@@ -46,9 +46,10 @@ export default function CreateMaterialPage() {
           try {
             const fileName = await useStorageStore.getState().loadFile(blob);
 
-            courseStore.loadDetailedCourse(courseStore.detailed_id);
-
-            callback(`http://localhost:4565/public/${fileName}`, "image");
+            callback(
+              `https://apis.swedka121.com/eduquiz/public/${fileName}`,
+              "image"
+            );
           } catch (err) {
             console.error("Image upload failed", err);
           }

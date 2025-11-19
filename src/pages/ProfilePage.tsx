@@ -68,7 +68,7 @@ function ProfilePage() {
             <div className="w-full h-max flex flex-col items-center justify-center">
               <img
                 className="w-50 h-50 rounded-full mt-10 mb-10"
-                src={`http://localhost:4565/public/${profileStore.avatar}`}
+                src={`https://apis.swedka121.com/eduquiz/public/${profileStore.avatar}`}
                 alt="profile avatar"
               ></img>
               <p className="text-[1.0rem] font-light">@{profileStore.name}</p>

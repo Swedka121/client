@@ -26,7 +26,7 @@ function FileCard({
         <div className="w-60 h-60 flex items-center justify-center overflow-hidden rounded-lg">
           <img
             className="w-full object-contain rounded-lg"
-            src={`http://localhost:4565/public/${path}`}
+            src={`https://apis.swedka121.com/eduquiz/public/${path}`}
           ></img>
         </div>
         <div className="flex flex-row justify-start gap-5 w-full">

@@ -138,7 +138,7 @@ export const useStorageStore = create<StorageStoreI>((set, get) => ({
     console.log(code.data.get_load_code);
 
     const file_ = await fetch(
-      `http://localhost:4565/storage/upload/${code.data.get_load_code}`,
+      `https://apis.swedka121.com/eduquiz/storage/upload/${code.data.get_load_code}`,
       {
         method: "POST",
         body: formDataFile,

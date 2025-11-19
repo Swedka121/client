@@ -63,6 +63,9 @@ const errorLink = new ErrorLink(({ error }) => {
   if (CombinedGraphQLErrors.is(error)) {
     error.errors.forEach((el) => {
       console.log(el.extensions.code);
+
+      if (el.extensions.code == "UNAUTHENTICATED") window.token.logout();
+
       useToasterStore.getState().add(el.message, "error");
     });
   }
@@ -89,6 +92,8 @@ const errorLinkAuth = new ErrorLink(({ error, operation, forward }) => {
                   mutation: REFRESH_MUTATION,
                   variables: { refreshToken: await window.token.get() },
                 });
+
+                console.log(result);
 
                 if (result.error || !result.data?.refresh) {
                   await window.token.logout();
@@ -137,7 +142,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: ApolloLink.from([
     errorLink,
-    new HttpLink({ uri: "http://localhost:4565/graphql" }),
+    new HttpLink({ uri: "https://apis.swedka121.com/eduquiz/graphql" }),
   ]),
 });
 
@@ -147,7 +152,7 @@ const authClient = new ApolloClient({
     triesLink,
     authLink,
     errorLinkAuth,
-    new HttpLink({ uri: "http://localhost:4565/graphql" }),
+    new HttpLink({ uri: "https://apis.swedka121.com/eduquiz/graphql" }),
   ]),
 });
 

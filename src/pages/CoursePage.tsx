@@ -51,14 +51,14 @@ function CoursePage() {
           <div className="absolute left-[-5vw] w-[100vw] bg-black h-full overflow-hidden flex items-center">
             <img
               className="w-full"
-              src={`http://localhost:4565/public/${courseStore.detailed_baner}`}
+              src={`https://apis.swedka121.com/eduquiz/public/${courseStore.detailed_baner}`}
             ></img>
           </div>
         </div>
         <div className="w-full h-30 flex flex-row items-center gap-5">
           <img
             className="h-25 w-25 rounded-full"
-            src={`http://localhost:4565/public/${courseStore.detailed_avatar}`}
+            src={`https://apis.swedka121.com/eduquiz/public/${courseStore.detailed_avatar}`}
           ></img>
           <h2 className="text-[1.6rem] font-bold">
             {courseStore.detailed_name}

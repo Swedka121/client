@@ -306,6 +306,8 @@ export const useCourseStore = create<CourseStoreI>((set, get) => ({
       mutation: ADD_MATERIAL,
       variables: { courseId: get().detailed_id, title, data },
     });
+
+    await get().loadDetailedCourse(get().detailed_id);
   },
   addCourseByCode: async (code: string) => {
     if (!useAuthStore.getState().client) return;

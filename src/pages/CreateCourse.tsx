@@ -64,7 +64,7 @@ function CreateCoursePage() {
       <div className="flex flex-col gap-5 w-full items-center">
         <article className="flex flex-row gap-5">
           <LaptopMock
-            mockHref={`http://localhost:4565/public/${courseStore.create_baner}`}
+            mockHref={`https://apis.swedka121.com/eduquiz/public/${courseStore.create_baner}`}
             className="w-90 h-90 rounded-lg overflow-hidden"
           />
           <div className="flex flex-col gap-5">
@@ -91,7 +91,7 @@ function CreateCoursePage() {
             <div className="w-60 h-60 overflow-hidden rounded-full">
               <img
                 className="w-full object-cover"
-                src={`http://localhost:4565/public/${courseStore.create_avatar}`}
+                src={`https://apis.swedka121.com/eduquiz/public/${courseStore.create_avatar}`}
               ></img>
             </div>
           </div>

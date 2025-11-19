@@ -65,7 +65,7 @@ export const useProfileStore = create<profileStoreI>((set, get) => ({
   updateAvatar: async (avatar: File) => {
     if (!useAuthStore.getState().client) return;
 
-    const filePath = useStorageStore.getState().loadFile(avatar);
+    const filePath = await useStorageStore.getState().loadFile(avatar);
 
     const result = await useAuthStore.getState().client.mutate<{
       change_avatar: {

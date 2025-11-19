@@ -22,7 +22,7 @@ function CourseCard({
           <div className="w-16 h-16 overflow-hidden rounded-full">
             <img
               className="w-full object-cover"
-              src={`http://localhost:4565/public/${avatar}`}
+              src={`https://apis.swedka121.com/eduquiz/public/${avatar}`}
             ></img>
           </div>
           <p className="w-3/5 text-[0.9rem]">{name}</p>
