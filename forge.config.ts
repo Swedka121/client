@@ -28,11 +28,11 @@ const config: ForgeConfig = {
     new MakerZIP({}),
     new MakerSquirrel({
       name: "EduQuiz",
-      iconUrl: "./logo.svg",
+      iconUrl: "./logo.ico",
       title: "EduQuiz",
       authors: "swedka121",
       version: `0.0.${Math.floor(Math.random() * 10000)}v`,
-      setupIcon: "./logo.svg",
+      setupIcon: "./logo.ico",
     }),
   ],
   plugins: [
