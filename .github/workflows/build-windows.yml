@@ -11,6 +11,9 @@ jobs:
     # !!! ЗМІНА: Використовуємо нативний Windows-раннер !!!
     runs-on: windows-latest
 
+    permissions:
+      contents: write
+
     # Визначаємо шлях до вашої Electron-частини (client)
     steps:
       - name: Checkout Code
