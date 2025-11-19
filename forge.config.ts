@@ -30,7 +30,6 @@ const config: ForgeConfig = {
       name: "EduQuiz",
       iconUrl: "./logo.ico",
       title: "EduQuiz",
-      authors: "swedka121",
       setupIcon: "./logo.ico",
     }),
   ],
