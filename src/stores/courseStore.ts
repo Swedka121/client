@@ -267,7 +267,10 @@ export const useCourseStore = create<CourseStoreI>((set, get) => ({
       detailed_id: id,
       detailed_code: result.data.get_my_course_by_id.course.code,
       detailed_role: result.data.get_my_course_by_id.role,
-      materials: result.data.get_my_course_by_id.course.materials,
+      materials: result.data.get_my_course_by_id.course.materials.toSorted(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      ),
     }));
   },
   setAvatarCreate: async (avatar: File) => {

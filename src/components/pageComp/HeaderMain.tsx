@@ -34,10 +34,7 @@ function HeaderMain() {
   return (
     <header className="w-full h-max flex flex-row pt-4 pb-4 justify-between items-center">
       <div className="w-15 h-15 overflow-hidden flex items-center justify-center">
-        <img
-          className="rounded-full w-30 h-30 object-cover"
-          src="./assets/logo.png"
-        ></img>
+        <img className="w-13 h-13" src="./assets/logo.svg"></img>
       </div>
       <div className="w-max flex flex-row gap-5">
         <LinkID

@@ -17,15 +17,23 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [
-    // new MakerDeb({
-    //   options: {
-    //     name: "eduQuiz",
-    //     version: `0.0.${Math.floor(Math.random() * 10000)}v`,
-    //     productName: "eduQuiz",
-    //   },
-    // }),
+    new MakerDeb({
+      options: {
+        name: "eduQuiz",
+        version: `0.0.${Math.floor(Math.random() * 10000)}v`,
+        productName: "eduQuiz",
+        icon: "./logo.svg",
+      },
+    }),
     new MakerZIP({}),
-    new MakerSquirrel({}),
+    new MakerSquirrel({
+      name: "EduQuiz",
+      iconUrl: "./logo.svg",
+      title: "EduQuiz",
+      authors: "swedka121",
+      version: `0.0.${Math.floor(Math.random() * 10000)}v`,
+      setupIcon: "./logo.svg",
+    }),
   ],
   plugins: [
     {

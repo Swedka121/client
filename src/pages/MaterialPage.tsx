@@ -26,7 +26,7 @@ function MaterialPage() {
       <div className="w-full h-fit">
         <div className="w-full flex flex-row gap-5 items-center">
           <div className="h-15 w-15 bg-(--main-color) rounded-full flex items-center justify-center">
-            <FileIcon className="bg-(--white-color)" />
+            <FileIcon color="var(--static-white-main)" />
           </div>
           <h2 className="text-[3rem] font-medium">{title}</h2>
         </div>

@@ -1,5 +1,6 @@
 import Button from "@components/ui/Button";
 import Card, { CardTitle } from "@components/ui/Card";
+import { useLanguagePack } from "@hooks/useLanguagePack";
 import { useStorageStore } from "@stores/storageStore";
 import { FileIcon, ImageIcon, TrashIcon } from "lucide-react";
 
@@ -15,6 +16,7 @@ function FileCard({
   const IMAGES = ["png", "jpeg", "webp"];
 
   const storageStore = useStorageStore();
+  const languagePack = useLanguagePack();
 
   if (IMAGES.includes(mime)) {
     return (
@@ -39,7 +41,7 @@ function FileCard({
             storageStore.deleteFile(path);
           }}
         >
-          Delete
+          {languagePack.page_card_profile_file_storage_delete}
         </Button>
       </Card>
     );

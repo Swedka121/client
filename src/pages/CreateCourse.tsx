@@ -3,6 +3,7 @@ import Button from "@components/ui/Button";
 import Input from "@components/ui/Input";
 import LaptopMock from "@components/ui/LaptopMock";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLanguagePack } from "@hooks/useLanguagePack";
 import { useCourseStore } from "@stores/courseStore";
 import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -54,6 +55,8 @@ function CreateCoursePage() {
     courseStore.setNameCreate(data.name);
   });
 
+  const languagePack = useLanguagePack();
+
   return (
     <section className="flex flex-col">
       <div className="w-full h-20 flex flex-row items-center pt-4 pb-4">
@@ -68,11 +71,11 @@ function CreateCoursePage() {
             className="w-90 h-90 rounded-lg overflow-hidden"
           />
           <div className="flex flex-col gap-5">
-            <h2 className="text-[2rem] font-medium">Банер курсу</h2>
+            <h2 className="text-[2rem] font-medium">
+              {languagePack.page_create_course_baner_title}
+            </h2>
             <p className="text-[0.9rem] font-regular max-w-100">
-              Банер буде розташовано вгорі сторінки вашого курсу. Щоб банер мав
-              гарний вигляд на всіх пристроях, використовуйте зображення
-              розміром принаймні 2028 x 1152 пікселів
+              {languagePack.page_create_course_baner_desc}
             </p>
             <form className="flex flex-col gap-3" onSubmit={onSub1}>
               <Input
@@ -81,7 +84,7 @@ function CreateCoursePage() {
                 error={form1.formState.errors.baner?.message}
               ></Input>
               <Button type="submit" className="w-full">
-                Change
+                {languagePack.page_create_course_change_button}
               </Button>
             </form>
           </div>
@@ -96,10 +99,11 @@ function CreateCoursePage() {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <h2 className="text-[2rem] font-medium">Аватарка</h2>
+            <h2 className="text-[2rem] font-medium">
+              {languagePack.page_create_course_avatar_title}
+            </h2>
             <p className="text-[0.9rem] font-regular max-w-100">
-              Аватарка курсу – це значок курсу, що відображається біля картки
-              курсу на головній сторінці.
+              {languagePack.page_create_course_avatar_desc}
             </p>
             <form className="flex flex-col gap-3" onSubmit={onSub2}>
               <Input
@@ -108,7 +112,7 @@ function CreateCoursePage() {
                 error={form2.formState.errors.avatar?.message}
               ></Input>
               <Button type="submit" className="w-full">
-                Change
+                {languagePack.page_create_course_change_button}
               </Button>
             </form>
           </div>
@@ -118,10 +122,11 @@ function CreateCoursePage() {
             <p className="w-9/10">@{courseStore.create_name}</p>
           </div>
           <div className="flex flex-col gap-5">
-            <h2 className="text-[2rem] font-medium">Назва курсу</h2>
+            <h2 className="text-[2rem] font-medium">
+              {languagePack.page_create_course_avatar_course_name_title}
+            </h2>
             <p className="text-[0.9rem] font-regular max-w-100">
-              Назва курсу буде відображатись біля картки курсу на головній
-              сторінці
+              {languagePack.page_create_course_avatar_course_name_desc}
             </p>
             <form className="flex flex-col gap-3" onSubmit={onSub3}>
               <Input
@@ -130,7 +135,7 @@ function CreateCoursePage() {
                 error={form3.formState.errors.name?.message}
               ></Input>
               <Button type="submit" className="w-full">
-                Change
+                {languagePack.page_create_course_change_button}
               </Button>
             </form>
           </div>
@@ -141,7 +146,7 @@ function CreateCoursePage() {
             courseStore.create();
           }}
         >
-          Create
+          {languagePack.page_create_course_create_button}
         </Button>
       </div>
     </section>

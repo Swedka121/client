@@ -9,6 +9,8 @@ import Input from "@components/ui/Input";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { useStorageStore } from "@stores/storageStore";
 import { useCourseStore } from "@stores/courseStore";
+import { languagePack } from "app";
+import { useLanguagePack } from "@hooks/useLanguagePack";
 
 const materialSchema = z.object({
   title: z.string().min(3).max(100),
@@ -29,6 +31,8 @@ export default function CreateMaterialPage() {
     resolver: zodResolver(materialSchema),
     defaultValues: { title: "" },
   });
+
+  const languagePack = useLanguagePack();
 
   const onSubmit = (data: MaterialForm) => {
     const content = editorRef.current?.getInstance().getMarkdown() || "";
@@ -65,11 +69,11 @@ export default function CreateMaterialPage() {
 
       <div className="w-full flex flex-row gap-5 items-center">
         <div className="h-15 w-15 bg-(--main-color) rounded-full flex items-center justify-center">
-          <FileIcon className="bg-(--white-color)" />
+          <FileIcon color="var(--static-white-main)" />
         </div>
 
         <Input
-          label="Material Title"
+          label={languagePack.page_material_new_main_title}
           {...register("title")}
           error={errors.title?.message}
         />
@@ -88,9 +92,9 @@ export default function CreateMaterialPage() {
 
       <button
         type="submit"
-        className="mt-4 bg-(--main-color) text-white font-bold p-3 rounded-lg w-32"
+        className="mt-4 bg-(--main-color) text-white font-bold p-3 rounded-lg w-64"
       >
-        Save
+        {languagePack.page_material_new_save_button}
       </button>
     </form>
   );

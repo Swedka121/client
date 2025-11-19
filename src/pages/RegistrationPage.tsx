@@ -82,34 +82,34 @@ function RegistrationPage() {
           className="w-120 h-full m-auto flex justify-center flex-col gap-5"
           onSubmit={onsub}
         >
-          <h2 className="text-[5rem] font-bold text-(--white-main)">
+          <h2 className="text-[5rem] font-bold text-(--static-white-main)">
             Hello There!
           </h2>
           <Input
             placeholder="Input your username"
             label="Username"
-            labelClassname="text-(--white-main)"
+            labelClassname="text-(--static-white-main)"
             error={form.formState.errors?.username?.message}
             {...form.register("username")}
           ></Input>
           <Input
             placeholder="Input your email"
             label="Email"
-            labelClassname="text-(--white-main)"
+            labelClassname="text-(--static-white-main)"
             error={form.formState.errors?.email?.message}
             {...form.register("email")}
           ></Input>
           <Input
             placeholder="Input your password"
             label="Password"
-            labelClassname="text-(--white-main)"
+            labelClassname="text-(--static-white-main)"
             error={form.formState.errors?.password?.message}
             {...form.register("password")}
           ></Input>
           <Input
             placeholder="Repeat you password"
             label="Repeat you password"
-            labelClassname="text-(--white-main)"
+            labelClassname="text-(--static-white-main)"
             error={form.formState.errors?.repeatPassword?.message}
             {...form.register("repeatPassword")}
           ></Input>

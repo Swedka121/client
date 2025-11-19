@@ -1,5 +1,6 @@
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
+import { replaceParam, useLanguagePack } from "@hooks/useLanguagePack";
 import { useCourseStore } from "@stores/courseStore";
 import { ArrowLeft, FileIcon } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
@@ -12,6 +13,7 @@ function CoursePage() {
   const [page, setPage] = useState<"material" | "member">("material");
   const [in_, tr] = useTransition();
   const navigate = useNavigate();
+  const languagePack = useLanguagePack();
 
   useEffect(() => {
     tr(async () => {
@@ -30,9 +32,17 @@ function CoursePage() {
         </Link>
         {courseStore.detailed_role == 1 ? (
           <div className="flex flex-row items-center gap-5 right-25 absolute">
-            <p className="font-bold">Code: {courseStore.detailed_code}</p>
+            <p className="font-bold">
+              {replaceParam(
+                1,
+                languagePack.page_course_code,
+                courseStore.detailed_code
+              )}
+            </p>
             <Link to={"/app/create_material"}>
-              <Button className="w-75 ml-30">Create material</Button>
+              <Button className="w-75 ml-30">
+                {languagePack.page_course_add_new}
+              </Button>
             </Link>
             <Button
               className="w-75"
@@ -41,7 +51,7 @@ function CoursePage() {
                 navigate("/app/main");
               }}
             >
-              Delete course
+              {languagePack.page_course_delete_course}
             </Button>
           </div>
         ) : null}
@@ -76,7 +86,7 @@ function CoursePage() {
                   className="flex flex-row gap-5 w-7/9 items-center"
                 >
                   <div className="h-15 w-15 bg-(--main-color) rounded-full flex items-center justify-center">
-                    <FileIcon />
+                    <FileIcon color="var(--static-white-main)" />
                   </div>
                   <h2>{el.title}</h2>
                 </Link>
@@ -87,7 +97,7 @@ function CoursePage() {
                       courseStore.deleteMaterial(el.id);
                     }}
                   >
-                    Delete
+                    {languagePack.page_course_delete_material}
                   </Button>
                 ) : null}
               </Card>

@@ -121,7 +121,7 @@ function ProfilePage() {
                     navigate("/");
                   }}
                 >
-                  Logout
+                  {languagePack.page_card_profile_logout}
                 </Button>
                 <Button
                   className="w-full bg-(--secd-color)"
@@ -130,14 +130,14 @@ function ProfilePage() {
                     navigate("/");
                   }}
                 >
-                  Delete
+                  {languagePack.page_card_profile_delete_user}
                 </Button>
               </div>
             </div>
           </Card>
           <Card className="w-full h-max min-h-[500px] col-span-full">
             <CardTitle>
-              <FileIcon /> File storage
+              <FileIcon /> {languagePack.page_card_profile_file_storage}
             </CardTitle>
             <div className="w-full pt-2 pb-2">
               <h2 className="pb-1 pt-1 font-medium text-(--black-main)">

@@ -1,5 +1,6 @@
 import Card, { CardTitle } from "@components/ui/Card";
 import Tag from "@components/ui/Tag";
+import { replaceParam, useLanguagePack } from "@hooks/useLanguagePack";
 import { Link } from "react-router";
 
 function CourseCard({
@@ -15,6 +16,8 @@ function CourseCard({
   id: number;
   teacher_member: { avatar: string; name: string };
 }) {
+  const languagePack = useLanguagePack();
+
   return (
     <Link to={`/app/course/${id}`}>
       <Card className="w-full h-full max-h-65">
@@ -30,14 +33,22 @@ function CourseCard({
         <div className="flex flex-row items-center gap-2 text-[0.8rem] font-regular mt-3">
           <Tag
             selected={false}
-            name={`Teacher @${teacher_member.name}`}
+            name={replaceParam(
+              1,
+              languagePack.page_home_card_teacher_is,
+              `@${teacher_member.name}`
+            )}
             clickCallback={() => {
               console.log("clicked");
             }}
           ></Tag>
           <Tag
             selected={false}
-            name={`My role ${my_role}`}
+            name={
+              my_role == "Teacher"
+                ? languagePack.page_home_card_my_role_teacher
+                : languagePack.page_home_card_my_role_student
+            }
             clickCallback={() => {
               console.log("clicked");
             }}

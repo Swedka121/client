@@ -19,20 +19,20 @@ function StartPage() {
     <Container>
       <div className="w-full h-[100vh] flex justify-center items-center flex-col">
         <img
-          src="./assets/logo.png"
+          src="./assets/logo.svg"
           alt="logo"
-          className="hover:scale-[0.9] transition-all h-150"
+          className="hover:scale-[0.9] transition-all h-50"
         ></img>
         {inTr ? (
           <p>Loading...</p>
         ) : isAuthorizedState ? (
           <>
-            <Link to={"/app/main"}>
+            <Link to={"/app/main"} className="mt-20">
               <Button className="w-90">Start</Button>
             </Link>
           </>
         ) : (
-          <Link to={"/login"}>
+          <Link to={"/login"} className="mt-20">
             <Button className="w-90">Login</Button>
           </Link>
         )}

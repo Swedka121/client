@@ -18,6 +18,7 @@ function MainPage() {
 
   const profileStore = useProfileStore();
   const courseStore = useCourseStore();
+  const languagePack = useLanguagePack();
 
   return (
     <section className="flex flex-col">
@@ -29,29 +30,29 @@ function MainPage() {
       </div>
       <div className="flex flex-row gap-2 flex-wrap w-full mt-10">
         <Link to={"/app/course_create"}>
-          <Button className="w-50">Create new</Button>
+          <Button className="w-fit">{languagePack.page_home_create_new}</Button>
         </Link>
         <Link to={"/app/connect_code"}>
-          <Button className="w-50">Add by code</Button>
+          <Button className="w-fit">{languagePack.page_home_add_code}</Button>
         </Link>
       </div>
       <div className="flex flex-row gap-2 flex-wrap w-full mt-2">
         <Tag
-          name="All"
+          name={languagePack.page_home_filter_all}
           clickCallback={() => {
             courseStore.setSelectedRole("All");
           }}
           selected={courseStore.selectedRole == "All"}
         />
         <Tag
-          name="Teacher"
+          name={languagePack.page_home_filter_teacher}
           clickCallback={() => {
             courseStore.setSelectedRole("Teacher");
           }}
           selected={courseStore.selectedRole == "Teacher"}
         />
         <Tag
-          name="Student"
+          name={languagePack.page_home_filter_student}
           clickCallback={() => {
             courseStore.setSelectedRole("Student");
           }}
