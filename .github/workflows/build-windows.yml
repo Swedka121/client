@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
-          path: client/out/make/squirrel.windows/**/*.exe
+          path: out/make/squirrel.windows/**/*.exe
           # Використовуємо client/ тому що всі команди запускаються в client/
 
       # 5. Створення GitHub Release
