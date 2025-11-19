@@ -27,9 +27,7 @@ const config: ForgeConfig = {
     }),
     new MakerZIP({}),
     new MakerSquirrel({
-      name: "EduQuiz",
       iconUrl: "./logo.ico",
-      title: "EduQuiz",
       setupIcon: "./logo.ico",
     }),
   ],
