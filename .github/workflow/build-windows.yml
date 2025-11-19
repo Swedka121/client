@@ -1,0 +1,75 @@
+name: Electron Forge Build (Windows)
+
+on:
+  # Запускати робочий процес при створенні нового тегу (релізу)
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+" # Наприклад, v1.0.0
+
+jobs:
+  build-win:
+    # !!! ЗМІНА: Використовуємо нативний Windows-раннер !!!
+    runs-on: windows-latest
+
+    # Визначаємо шлях до вашої Electron-частини (client)
+    defaults:
+      run:
+        working-directory: client
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 1. Встановлення Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "client/package-lock.json"
+
+      - name: Install Dependencies
+        run: npm install
+
+      # 2. Видалено кроки "Install Wine and Mono", оскільки Windows-раннер цього не потребує.
+      # Усі необхідні .NET та Windows-бінарники доступні нативно.
+
+      # 3. Запуск Electron Forge Make
+      # Використовуємо --platform=win32 для збірки Windows
+      - name: Run Electron Forge Make (Windows)
+        # Використовуємо powershell для Windows-раннера
+        shell: powershell
+        run: npm run make -- --platform=win32
+
+      # 4. Пошук збудованого інсталятора Squirrel
+      # Файли Squirrel Maker зазвичай знаходяться у out/make/squirrel.windows/
+      - name: Find and Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: client/out/make/squirrel.windows/**/*.exe
+          # Використовуємо client/ тому що всі команди запускаються в client/
+
+      # 5. Створення GitHub Release
+      # Цей крок вимагає наявності GITHUB_TOKEN у середовищі
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      # 6. Завантаження інсталятора до Release
+      - name: Upload Installer to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/client/out/make/squirrel.windows/**/*.exe
+          asset_name: EduQuiz-Setup-${{ github.ref_name }}.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
