@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
-          path: out/make/squirrel.windows/**/*.exe
+          path: out/make/squirrel.windows/x64/*.exe
           # Використовуємо client/ тому що всі команди запускаються в client/
 
       # 5. Створення GitHub Release
@@ -71,6 +71,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/out/make/squirrel.windows/**/*.exe
+          asset_path: ${{ github.workspace }}/out/make/squirrel.windows/x64/*.exe
           asset_name: EduQuiz-Setup-${{ github.ref_name }}.exe
           asset_content_type: application/vnd.microsoft.portable-executable
