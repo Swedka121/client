@@ -26,10 +26,7 @@ const config: ForgeConfig = {
       },
     }),
     new MakerZIP({}),
-    new MakerSquirrel({
-      iconUrl: "./logo.ico",
-      setupIcon: "./logo.ico",
-    }),
+    new MakerSquirrel({}),
   ],
   plugins: [
     {
