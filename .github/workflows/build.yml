@@ -91,4 +91,4 @@ jobs:
         with:
           files: release/**/*.*
           make_latest: true
-          name: Release EduQuiz ${{github.ref}}
+          name: Release EduQuiz ${{github.ref_name}}
