@@ -17,12 +17,10 @@ jobs:
     env:
       VITE_SERVER_URL: https://apis.swedka121.com/eduquiz
 
-    # Визначаємо шлях до вашої Electron-частини (client)
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 1. Встановлення Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -31,13 +29,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci --force
 
-      # 2. Видалено кроки "Install Wine and Mono", оскільки Windows-раннер цього не потребує.
-      # Усі необхідні .NET та Windows-бінарники доступні нативно.
-
-      # 3. Запуск Electron Forge Make
-      # Використовуємо --platform=win32 для збірки Windows
       - name: Run Electron Forge Make (Windows)
-        # Використовуємо powershell для Windows-раннера
         shell: powershell
         run: npm run make -- --platform=win32
 
@@ -45,29 +37,39 @@ jobs:
         shell: powershell
         run: dir out/make/squirrel.windows
 
-      # 4. Пошук збудованого інсталятора Squirrel
-      # Файли Squirrel Maker зазвичай знаходяться у out/make/squirrel.windows/
       - name: Find and Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
           path: out/make/squirrel.windows/x64/*.exe
-          # Використовуємо client/ тому що всі команди запускаються в client/
 
-      # 5. Створення GitHub Release
-      # Цей крок вимагає наявності GITHUB_TOKEN у середовищі
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build-deb:
+    name: Build for Debian/Ubuntu
+    runs-on: ubuntu-latest
+
+    env:
+      VITE_SERVER_URL: https://apis.swedka121.com/eduquiz
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
+          node-version: "20"
 
-      # 6. Завантаження інсталятора до Release
+      - name: Install Dependencies
+        run: npm ci --force
+
+      - name: Run Electron Forge Make (Debian)
+        run: npm run make -- --platform=linux
+
+      - name: Find and Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb-installer
+          path: out/make/deb/x64/*.deb
 
   downloadAndRelease:
     name: Create GitHub Release
@@ -76,7 +78,7 @@ jobs:
     permissions:
       contents: write
 
-    needs: [build-win]
+    needs: [build-win, build-deb]
 
     steps:
       - name: Download All Build Artifacts
@@ -90,3 +92,4 @@ jobs:
         with:
           files: release/**/*.*
           make_latest: true
+          name: Release EduQuiz ${{github.ref}}
