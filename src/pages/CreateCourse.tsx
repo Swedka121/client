@@ -1,4 +1,5 @@
 import HeaderMain from "@components/pageComp/HeaderMain";
+import Avatar from "@components/ui/Avatar";
 import Button from "@components/ui/Button";
 import Input from "@components/ui/Input";
 import LaptopMock from "@components/ui/LaptopMock";
@@ -91,12 +92,7 @@ function CreateCoursePage() {
         </article>
         <article className="flex flex-row gap-5">
           <div className="w-90 h-90 flex justify-center items-center">
-            <div className="w-60 h-60 overflow-hidden rounded-full">
-              <img
-                className="w-full object-cover"
-                src={`${import.meta.env.VITE_SERVER_URL}/public/${courseStore.create_avatar}`}
-              ></img>
-            </div>
+            <Avatar className="w-60 h-60" image={courseStore.create_avatar} />
           </div>
           <div className="flex flex-col gap-5">
             <h2 className="text-[2rem] font-medium">
@@ -119,7 +115,9 @@ function CreateCoursePage() {
         </article>
         <article className="flex flex-row gap-5">
           <div className="w-90 h-90 flex justify-center items-center">
-            <p className="w-9/10">@{courseStore.create_name}</p>
+            <p className="w-max max-w-1/9 min-w-3/9">
+              @{courseStore.create_name}
+            </p>
           </div>
           <div className="flex flex-col gap-5">
             <h2 className="text-[2rem] font-medium">

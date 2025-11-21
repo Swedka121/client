@@ -12,7 +12,7 @@ import { useLanguagePack } from "@hooks/useLanguagePack";
 import { useProfileStore } from "@stores/profileStore";
 import { useStorageStore } from "@stores/storageStore";
 import { FileIcon, PencilIcon, User } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import z from "zod";
@@ -74,7 +74,7 @@ function ProfilePage() {
               <p className="text-[1.0rem] font-light">@{profileStore.name}</p>
             </div>
           </Card>
-          <Card className="w-full h-full col-span-2 xl:col-span-3">
+          <Card className="w-full h-full col-span-2 xl:col-span-3 overflow-y-auto">
             <div className="flex flex-col gap-5">
               <CardTitle>
                 <PencilIcon />

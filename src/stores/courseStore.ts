@@ -159,7 +159,7 @@ const DELETE_MATERIAL = gql`
 
 export const useCourseStore = create<CourseStoreI>((set, get) => ({
   create_avatar: "default_avatar.png",
-  create_baner: "default_banner.jpg",
+  create_baner: "default.jpg",
   create_name: "course name",
   courses: new Map(),
   detailed_avatar: "",

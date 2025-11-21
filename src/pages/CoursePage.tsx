@@ -1,3 +1,4 @@
+import Avatar from "@components/ui/Avatar";
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
 import { Skeleton, SkeletonBody } from "@components/ui/Skeleton";
@@ -65,10 +66,11 @@ function CoursePage() {
           </div>
         </div>
         <div className="w-full h-30 flex flex-row items-center gap-5">
-          <img
-            className="h-25 w-25 rounded-full"
-            src={`${import.meta.env.VITE_SERVER_URL}/public/${courseStore.detailed_avatar}`}
-          ></img>
+          <Avatar
+            className="w-25 h-25"
+            image={courseStore.detailed_avatar}
+          ></Avatar>
+
           <h2 className="text-[1.6rem] font-bold">
             {courseStore.detailed_name}
           </h2>
@@ -87,7 +89,7 @@ function CoursePage() {
             </div>
           ) : (
             <>
-              {[1, 2, 3].map((el) => (
+              {[1, 2, 3, 4, 5, 6].map((el) => (
                 <SkeletonBody className="w-full h-fit" key={el}>
                   <Card className="w-full flex flex-row items-center gap-5 text-[1.2rem] font-medium relative">
                     <Skeleton className="w-15 h-15 rounded-full" />

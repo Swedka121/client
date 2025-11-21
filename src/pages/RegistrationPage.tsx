@@ -20,7 +20,16 @@ interface LoginForm {
 const formSchema = z
   .object({
     username: z.string().min(3, "Username must be at least 3 characters"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>,.?/:;{}\]])(?=.{8,}).*$/,
+        {
+          error:
+            "Password must be strong: one uppercase character, one lowercase character, one digit and one special character",
+        }
+      ),
     email: z.email(),
     repeatPassword: z.string(),
   })
@@ -103,6 +112,7 @@ function RegistrationPage() {
             placeholder="Input your password"
             label="Password"
             labelClassname="text-(--static-white-main)"
+            type="password"
             error={form.formState.errors?.password?.message}
             {...form.register("password")}
           ></Input>
@@ -110,6 +120,7 @@ function RegistrationPage() {
             placeholder="Repeat you password"
             label="Repeat you password"
             labelClassname="text-(--static-white-main)"
+            type="password"
             error={form.formState.errors?.repeatPassword?.message}
             {...form.register("repeatPassword")}
           ></Input>

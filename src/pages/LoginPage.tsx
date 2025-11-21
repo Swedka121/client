@@ -77,6 +77,7 @@ function LoginPage() {
             label="Password"
             labelClassname="text-(--static-white-main)"
             error={form.formState.errors?.password?.message}
+            type="password"
             {...form.register("password")}
           ></Input>
           <Button
