@@ -1,14 +1,13 @@
-name: Electron Forge Build (Windows)
+name: Electron Forge Build
 
 on:
-  # Запускати робочий процес при створенні нового тегу (релізу)
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+" # Наприклад, v1.0.0
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   build-win:
-    # !!! ЗМІНА: Використовуємо нативний Windows-раннер !!!
+    name: Build for Windows
     runs-on: windows-latest
 
     permissions:
