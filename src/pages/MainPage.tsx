@@ -1,8 +1,11 @@
 import Animate from "@components/Animate";
-import CourseCard from "@components/pageComp/CourseCard";
+import CourseCard, {
+  CourseCardSkeleton,
+} from "@components/pageComp/CourseCard";
 import HeaderMain from "@components/pageComp/HeaderMain";
 import Button from "@components/ui/Button";
 import Card, { CardTitle } from "@components/ui/Card";
+import { Skeleton, SkeletonBody } from "@components/ui/Skeleton";
 import Tag from "@components/ui/Tag";
 import { replaceParam, useLanguagePack } from "@hooks/useLanguagePack";
 import { useCourseStore } from "@stores/courseStore";
@@ -64,8 +67,19 @@ function MainPage() {
           ref={rootRef}
           className="grid grid-cols-2 4xl:grid-cols-6 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-3 grid-rows-auto w-full h-fit gap-4 mt-2"
         >
+          {[1, 2, 3].map((el) => (
+            <CourseCardSkeleton key={el} />
+          ))}
           {courseStore.getFiltredCourses().length == 0 ? (
-            <div className="w-full h-fit"></div>
+            <div className="absolute left-0 w-[100vw] h-[50vh] flex justify-center items-center flex-col gap-5">
+              <img
+                className="rounded-md w-100 h-100"
+                src="./assets/document_undefined.jpg"
+              ></img>
+              <h2 className="w-150 text-center font-bold text-[2rem]">
+                {languagePack.opps_no_content}
+              </h2>
+            </div>
           ) : (
             courseStore
               .getFiltredCourses()

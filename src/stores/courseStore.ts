@@ -4,6 +4,7 @@ import { gql } from "@apollo/client";
 import { useAuthStore } from "./authStore";
 import { useNavigate } from "react-router";
 import { router } from "../app";
+import { useLoadingStore } from "./loadingStore";
 
 interface CourseStoreI {
   create_baner: string;
@@ -183,6 +184,7 @@ export const useCourseStore = create<CourseStoreI>((set, get) => ({
     set((prev) => ({ ...prev, selectedRole: role }));
   },
   load: async () => {
+    useLoadingStore.getState().setLoading(true);
     if (!useAuthStore.getState().client) return;
 
     const result = await useAuthStore.getState().client.query<{
@@ -227,9 +229,11 @@ export const useCourseStore = create<CourseStoreI>((set, get) => ({
     });
 
     set((prev) => ({ ...prev, courses: map }));
+    useLoadingStore.getState().setLoading(false);
   },
   loadDetailedCourse: async (id: number) => {
     if (!useAuthStore.getState().client) return;
+    useLoadingStore.getState().setLoading(true);
 
     const result = await useAuthStore.getState().client.query<{
       get_my_course_by_id: {
@@ -272,6 +276,7 @@ export const useCourseStore = create<CourseStoreI>((set, get) => ({
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       ),
     }));
+    useLoadingStore.getState().setLoading(false);
   },
   setAvatarCreate: async (avatar: File) => {
     const filePath = await useStorageStore.getState().loadFile(avatar);
@@ -299,7 +304,6 @@ export const useCourseStore = create<CourseStoreI>((set, get) => ({
       });
 
     await get().load();
-
     router.navigate(`/app/course/${result.data.create_course.id}`);
   },
   createMaterial: async (title: string, data: string) => {

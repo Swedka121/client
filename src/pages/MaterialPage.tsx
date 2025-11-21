@@ -1,7 +1,6 @@
 import { ArrowLeft, FileIcon } from "lucide-react";
-import { Link, useNavigate, useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { marked } from "marked";
-import { useEffect } from "react";
 
 function MaterialPage() {
   const router = useNavigate();
@@ -10,9 +9,6 @@ function MaterialPage() {
   const title = params.get("title");
   const data = params.get("data");
 
-  useEffect(() => {
-    console.log(data);
-  }, []);
   return (
     <section className="flex flex-col">
       <div className="w-full h-20 flex flex-row items-center pt-4 pb-4 ">

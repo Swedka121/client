@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "nodenext",
-    "allowJs": true,
+    "target": "esnext",
+    "module": "esnext",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
@@ -16,8 +15,9 @@
       "@stores/*": ["stores/*"]
     },
     "outDir": "dist",
-    "moduleResolution": "nodenext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "typeRoots": ["types/vite-env.d.ts"]
   }
 }

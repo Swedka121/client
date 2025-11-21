@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import Toaster from "./Toaster";
 import { useToasterStore } from "@stores/toasterStore";
+import ToasterLoading from "./ToasterLoading";
 
 export const toaster = createContext({
   add: (data: string, type: "info" | "error") => {
@@ -13,7 +14,8 @@ export function ToasterContainer() {
 
   return (
     <>
-      <div className="w-120 h-max flex flex-col gap-2 absolute z-10 top-5 left-5">
+      <div className="w-120 h-max flex flex-col gap-2 fixed z-10 top-5 left-5">
+        <ToasterLoading />
         {toaster.toaster.map((el) => (
           <Toaster
             key={el.id}

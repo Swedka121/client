@@ -1,6 +1,7 @@
 import Animate from "@components/Animate";
 import FileCard from "@components/pageComp/FileCard";
 import HeaderMain from "@components/pageComp/HeaderMain";
+import Avatar from "@components/ui/Avatar";
 import Button from "@components/ui/Button";
 import Card, { CardTitle } from "@components/ui/Card";
 import Input from "@components/ui/Input";
@@ -66,11 +67,10 @@ function ProfilePage() {
               {languagePack.page_card_profile_data}
             </CardTitle>
             <div className="w-full h-max flex flex-col items-center justify-center">
-              <img
-                className="w-50 h-50 rounded-full mt-10 mb-10"
-                src={`https://apis.swedka121.com/eduquiz/public/${profileStore.avatar}`}
-                alt="profile avatar"
-              ></img>
+              <Avatar
+                className="w-50 h-50 mt-10 mb-10"
+                image={profileStore.avatar}
+              />
               <p className="text-[1.0rem] font-light">@{profileStore.name}</p>
             </div>
           </Card>

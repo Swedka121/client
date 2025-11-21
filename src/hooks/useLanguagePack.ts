@@ -55,6 +55,8 @@ export const translations = {
     page_course_delete_material: "Delete material",
     page_material_new_main_title: "Material title",
     page_material_new_save_button: "Save material",
+    please_wait_loading: "Please wait, loading...",
+    opps_no_content: "Opsss... Content for this page is undefined",
   },
   ua: {
     header_home_tab: "Головна",
@@ -110,6 +112,8 @@ export const translations = {
     page_course_delete_material: "Видалити матеріал",
     page_material_new_main_title: "Заголовок матеріалу",
     page_material_new_save_button: "Зберегти матеріал",
+    please_wait_loading: "Будь-ласка зачекайте, завантаження...",
+    opps_no_content: "Ой... Ми не змогли знайти контент для цієї сторінки",
   },
 } as const;
 

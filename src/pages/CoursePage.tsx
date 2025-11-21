@@ -1,7 +1,9 @@
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
+import { Skeleton, SkeletonBody } from "@components/ui/Skeleton";
 import { replaceParam, useLanguagePack } from "@hooks/useLanguagePack";
 import { useCourseStore } from "@stores/courseStore";
+import { useLoadingStore } from "@stores/loadingStore";
 import { ArrowLeft, FileIcon } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
 import { useNavigate, useParams } from "react-router";
@@ -18,11 +20,8 @@ function CoursePage() {
   useEffect(() => {
     tr(async () => {
       await courseStore.loadDetailedCourse(Number(id));
-      console.log(useCourseStore.getState());
     });
   }, []);
-
-  if (in_) return <p>Loading...</p>;
 
   return (
     <section className="flex flex-col">
@@ -61,51 +60,70 @@ function CoursePage() {
           <div className="absolute left-[-5vw] w-[100vw] bg-black h-full overflow-hidden flex items-center">
             <img
               className="w-full"
-              src={`https://apis.swedka121.com/eduquiz/public/${courseStore.detailed_baner}`}
+              src={`${import.meta.env.VITE_SERVER_URL}/public/${courseStore.detailed_baner}`}
             ></img>
           </div>
         </div>
         <div className="w-full h-30 flex flex-row items-center gap-5">
           <img
             className="h-25 w-25 rounded-full"
-            src={`https://apis.swedka121.com/eduquiz/public/${courseStore.detailed_avatar}`}
+            src={`${import.meta.env.VITE_SERVER_URL}/public/${courseStore.detailed_avatar}`}
           ></img>
           <h2 className="text-[1.6rem] font-bold">
             {courseStore.detailed_name}
           </h2>
         </div>
-        {page == "material" ? (
-          <div className="w-full h-fit flex flex-col gap-5">
-            {courseStore.materials.map((el) => (
-              <Card
-                key={el.title}
-                className="w-full flex flex-row items-center gap-5 text-[1.2rem] font-medium relative"
-              >
-                <Link
-                  to={`/app/material?title=${el.title}&data=${encodeURIComponent(el.data)}`}
-                  className="flex flex-row gap-5 w-7/9 items-center"
+
+        <div className="w-full h-fit flex flex-col gap-5">
+          {courseStore.materials.length == 0 ? (
+            <div className="absolute left-0 w-[100vw] h-[50vh] flex justify-center items-center flex-col gap-5">
+              <img
+                className="rounded-md w-100 h-100"
+                src="./assets/document_undefined.jpg"
+              ></img>
+              <h2 className="w-150 text-center font-bold text-[2rem]">
+                {languagePack.opps_no_content}
+              </h2>
+            </div>
+          ) : (
+            <>
+              {[1, 2, 3].map((el) => (
+                <SkeletonBody className="w-full h-fit" key={el}>
+                  <Card className="w-full flex flex-row items-center gap-5 text-[1.2rem] font-medium relative">
+                    <Skeleton className="w-15 h-15 rounded-full" />
+                    <Skeleton className="w-100 h-5" />
+                  </Card>
+                </SkeletonBody>
+              ))}
+              {courseStore.materials.map((el) => (
+                <Card
+                  key={el.title}
+                  className="w-full flex flex-row items-center gap-5 text-[1.2rem] font-medium relative"
                 >
-                  <div className="h-15 w-15 bg-(--main-color) rounded-full flex items-center justify-center">
-                    <FileIcon color="var(--static-white-main)" />
-                  </div>
-                  <h2>{el.title}</h2>
-                </Link>
-                {courseStore.detailed_role == 1 ? (
-                  <Button
-                    className="w-50 right-10 absolute z-2"
-                    onClick={() => {
-                      courseStore.deleteMaterial(el.id);
-                    }}
+                  <Link
+                    to={`/app/material?title=${el.title}&data=${encodeURIComponent(el.data)}`}
+                    className="flex flex-row gap-5 w-7/9 items-center"
                   >
-                    {languagePack.page_course_delete_material}
-                  </Button>
-                ) : null}
-              </Card>
-            ))}
-          </div>
-        ) : (
-          <div></div>
-        )}
+                    <div className="h-15 w-15 bg-(--main-color) rounded-full flex items-center justify-center">
+                      <FileIcon color="var(--static-white-main)" />
+                    </div>
+                    <h2>{el.title}</h2>
+                  </Link>
+                  {courseStore.detailed_role == 1 ? (
+                    <Button
+                      className="w-50 right-10 absolute z-2"
+                      onClick={() => {
+                        courseStore.deleteMaterial(el.id);
+                      }}
+                    >
+                      {languagePack.page_course_delete_material}
+                    </Button>
+                  ) : null}
+                </Card>
+              ))}
+            </>
+          )}
+        </div>
       </div>
     </section>
   );

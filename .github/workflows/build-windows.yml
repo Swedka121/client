@@ -14,6 +14,9 @@ jobs:
     permissions:
       contents: write
 
+    env:
+      VITE_SERVER_URL: https://apis.swedka121.com/eduquiz
+
     # Визначаємо шлях до вашої Electron-частини (client)
     steps:
       - name: Checkout Code
@@ -65,12 +68,25 @@ jobs:
           prerelease: false
 
       # 6. Завантаження інсталятора до Release
-      - name: Upload Installer to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  downloadAndRelease:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    needs: [build-win]
+
+    steps:
+      - name: Download All Build Artifacts
+        uses: actions/download-artifact@v4
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/out/make/squirrel.windows/x64/*.exe
-          asset_name: EduQuiz-Setup-${{ github.ref_name }}.exe
-          asset_content_type: application/vnd.microsoft.portable-executable
+          path: release/
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: release/**/*.*
+          make_latest: true

@@ -142,7 +142,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: ApolloLink.from([
     errorLink,
-    new HttpLink({ uri: "https://apis.swedka121.com/eduquiz/graphql" }),
+    new HttpLink({ uri: `${import.meta.env.VITE_SERVER_URL}/graphql` }),
   ]),
 });
 
@@ -152,7 +152,7 @@ const authClient = new ApolloClient({
     triesLink,
     authLink,
     errorLinkAuth,
-    new HttpLink({ uri: "https://apis.swedka121.com/eduquiz/graphql" }),
+    new HttpLink({ uri: `${import.meta.env.VITE_SERVER_URL}/graphql` }),
   ]),
 });
 

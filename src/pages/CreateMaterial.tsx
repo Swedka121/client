@@ -51,7 +51,7 @@ export default function CreateMaterialPage() {
             const fileName = await useStorageStore.getState().loadFile(blob);
 
             callback(
-              `https://apis.swedka121.com/eduquiz/public/${fileName}`,
+              `${import.meta.env.VITE_SERVER_URL}/public/${fileName}`,
               "image"
             );
           } catch (err) {

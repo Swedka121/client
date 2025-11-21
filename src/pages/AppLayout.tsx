@@ -1,6 +1,7 @@
 import Container from "@components/Container";
 import { useRefreshToken } from "@hooks/useRefreshToken";
 import { useCourseStore } from "@stores/courseStore";
+import { useLoadingStore } from "@stores/loadingStore";
 import { useProfileStore } from "@stores/profileStore";
 import { useStorageStore } from "@stores/storageStore";
 import { useEffect, useState, useTransition } from "react";
@@ -23,19 +24,20 @@ export function AppLayout() {
 
       if (!authorized) navigation("/login");
 
+      useLoadingStore.getState().setLoading(true);
+
       await profileStore.load();
       await storageStore.load();
       await courseStore.load();
+
+      useLoadingStore.getState().setLoading(false);
     });
   }, []);
 
-  return inTr ? (
-    <p>Loading...</p>
-  ) : (
+  return (
     <Container>
       <div className="w-full h-full">
         <Outlet />
-        <div className="h-20"></div>
       </div>
     </Container>
   );

@@ -7,7 +7,6 @@ import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
 import { rebuild } from "@electron/rebuild";
-import electronPackage from "electron/package.json";
 
 const config: ForgeConfig = {
   packagerConfig: {

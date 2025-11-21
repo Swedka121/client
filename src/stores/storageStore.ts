@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { create } from "zustand";
 import { useAuthStore } from "./authStore";
+import { useLoadingStore } from "./loadingStore";
 
 interface FileI {
   mime: string;
@@ -128,6 +129,8 @@ export const useStorageStore = create<StorageStoreI>((set, get) => ({
   },
 
   loadFile: async (file: File) => {
+    useLoadingStore.getState().setLoading(true);
+
     const code = await useAuthStore.getState().client.query<{
       get_load_code: string;
     }>({ query: GET_LOAD_CODE, fetchPolicy: "no-cache" });
@@ -138,7 +141,7 @@ export const useStorageStore = create<StorageStoreI>((set, get) => ({
     console.log(code.data.get_load_code);
 
     const file_ = await fetch(
-      `https://apis.swedka121.com/eduquiz/storage/upload/${code.data.get_load_code}`,
+      `${import.meta.env.VITE_SERVER_URL}/storage/upload/${code.data.get_load_code}`,
       {
         method: "POST",
         body: formDataFile,
@@ -146,6 +149,8 @@ export const useStorageStore = create<StorageStoreI>((set, get) => ({
     ).then((data) => data.json());
 
     await get().load();
+
+    useLoadingStore.getState().setLoading(false);
 
     return file_.path;
   },

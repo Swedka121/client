@@ -128,7 +128,6 @@ function App() {
 
   return (
     <ApolloClientDynamic>
-      <ToasterContainer />
       <languagePack.Provider
         value={{
           lang,
@@ -145,6 +144,7 @@ function App() {
             dark,
           }}
         >
+          <ToasterContainer />
           <RouterProvider router={router} />
         </modeDark.Provider>
       </languagePack.Provider>
